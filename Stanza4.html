@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sogno | Stanze dell'Io</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        overflow: hidden;
+        font-family: Georgia, serif;
+        background: linear-gradient(to top, #fdf6e3, #ffffff);
+        color: #3a2b1a;
+      }
+
+      /* NUVOLE */
+      .cloud {
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        filter: blur(6px);
+        opacity: 0.8;
+      }
+
+      .cloud1 {
+        width: 200px;
+        height: 100px;
+        top: 20%;
+        left: 10%;
+        animation: moveCloud 20s infinite linear;
+      }
+      .cloud2 {
+        width: 300px;
+        height: 140px;
+        top: 50%;
+        left: 60%;
+        animation: moveCloud 30s infinite linear;
+      }
+      .cloud3 {
+        width: 180px;
+        height: 90px;
+        top: 70%;
+        left: 20%;
+        animation: moveCloud 25s infinite linear;
+      }
+
+      @keyframes moveCloud {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(100vw);
+        }
+      }
+
+      /* COLONNE */
+      .column {
+        position: absolute;
+        bottom: 0;
+        width: 80px;
+        height: 60vh;
+        background: linear-gradient(#ffffff, #eee8da);
+        border-radius: 20px;
+        opacity: 0.4;
+        filter: blur(2px);
+      }
+      .column.left {
+        left: 5%;
+      }
+      .column.right {
+        right: 5%;
+      }
+
+      /* LUCE DIVINA */
+      .light {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 100vh;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.9),
+          transparent
+        );
+        opacity: 0.6;
+        filter: blur(10px);
+      }
+
+      header {
+        position: absolute;
+        top: 20px;
+        left: 30px;
+      }
+
+      header a {
+        text-decoration: none;
+        color: #6b4a1f;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 10px 15px;
+        border-radius: 20px;
+      }
+
+      main {
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: space-around;
+        gap: 60px;
+        padding: 40px;
+      }
+
+      .img-box {
+        position: relative;
+        z-index: 2;
+      }
+
+      .img-box img {
+        width: 700px;
+        max-width: 90vw;
+        border-radius: 25px;
+        box-shadow:
+          0 0 120px rgba(255, 220, 150, 0.9),
+          0 0 200px rgba(255, 255, 255, 0.6);
+      }
+
+      .text-box {
+        position: absolute;
+        right: 8%;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 420px;
+        background: rgba(255, 255, 255, 0.75);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        z-index: 3;
+      }
+
+      h1 {
+        font-size: 60px;
+        color: #d4af37;
+      }
+
+      .desc {
+        margin-top: 20px;
+        padding: 20px;
+        border: 2px dashed #e0c48a;
+        border-radius: 15px;
+      }
+
+      /* STELLE */
+      .star {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px gold;
+        animation: twinkle 2s infinite alternate;
+      }
+
+      @keyframes twinkle {
+        from {
+          opacity: 0.3;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* PARTICELLE */
+      .particle {
+        position: fixed;
+        width: 5px;
+        height: 5px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px gold;
+        animation: float linear infinite;
+      }
+
+      @keyframes float {
+        from {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-20vh);
+          opacity: 0;
+        }
+      }
+
+      .img-box {
+        flex: 1.3;
+      }
+
+      .text-box {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="light"></div>
+
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <div class="column left"></div>
+    <div class="column right"></div>
+
+    <header>
+      <a href="index.html">← Torna</a>
+    </header>
+
+    <main>
+      <div class="img-box">
+        <img src="imgs/bianco.jpg" alt="Sogno" />
+
+        <div class="star" style="top: 10%; left: 20%"></div>
+        <div class="star" style="top: 30%; left: 80%"></div>
+      </div>
+
+      <div class="text-box">
+        <h1>Sogno</h1>
+
+        <p>
+          Una dimensione pura e sospesa, dove la realtà si dissolve e resta solo
+          luce.
+        </p>
+
+        <div class="desc">
+          <strong>Descrizione:</strong><br />
+          Inserisci qui la descrizione dell'opera.
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function createParticle() {
+        const p = document.createElement("div");
+        p.classList.add("particle");
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = 6 + Math.random() * 6 + "s";
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 12000);
+      }
+
+      setInterval(createParticle, 300);
+    </script>
+  </body>
+</html>

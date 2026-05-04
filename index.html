@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stanze dell'Io</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Georgia, "Times New Roman", serif;
+        overflow: hidden;
+        color: white;
+        background:
+          radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 111, 0, 0.65),
+            transparent 25%
+          ),
+          radial-gradient(
+            circle at 85% 25%,
+            rgba(255, 255, 255, 0.8),
+            transparent 22%
+          ),
+          radial-gradient(
+            circle at 20% 85%,
+            rgba(200, 170, 80, 0.55),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 0, 0, 0.85),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #ff8c00, #d8bd63, #2b2b2b, #f5f0e8);
+        background-size: 140% 140%;
+        animation: sfondoVivo 14s ease-in-out infinite alternate;
+      }
+
+      @keyframes sfondoVivo {
+        from {
+          background-position: 0% 0%;
+        }
+        to {
+          background-position: 100% 100%;
+        }
+      }
+
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.04) 0px,
+            rgba(255, 255, 255, 0.04) 1px,
+            transparent 1px,
+            transparent 80px
+          );
+        pointer-events: none;
+      }
+
+      header {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding-top: 45px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 8vw, 7rem);
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        text-shadow:
+          0 0 20px rgba(255, 255, 255, 0.6),
+          0 0 40px rgba(255, 140, 0, 0.5),
+          4px 4px 0 rgba(0, 0, 0, 0.35);
+      }
+
+      .sottotitolo {
+        margin-top: 10px;
+        font-size: clamp(1rem, 2vw, 1.35rem);
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      main {
+        position: relative;
+        z-index: 2;
+        min-height: calc(100vh - 180px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .portone-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .alone-text {
+        margin-bottom: 22px;
+        font-size: 1.15rem;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.86);
+        text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      }
+
+      .portone {
+        width: min(320px, 72vw);
+        height: min(500px, 62vh);
+        border: none;
+        cursor: pointer;
+        position: relative;
+        border-radius: 160px 160px 18px 18px;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.4),
+            transparent 18%,
+            rgba(255, 255, 255, 0.12) 50%,
+            transparent 82%,
+            rgba(0, 0, 0, 0.45)
+          ),
+          linear-gradient(135deg, #5c2f11, #a75d1a, #2a1408);
+        box-shadow:
+          0 0 0 10px rgba(255, 255, 255, 0.12),
+          0 0 0 18px rgba(0, 0, 0, 0.35),
+          0 35px 80px rgba(0, 0, 0, 0.75),
+          inset 0 0 45px rgba(0, 0, 0, 0.7);
+        transition:
+          transform 0.35s ease,
+          box-shadow 0.35s ease;
+      }
+
+      .portone:hover {
+        transform: scale(1.035) translateY(-6px);
+        box-shadow:
+          0 0 0 10px rgba(255, 255, 255, 0.18),
+          0 0 0 18px rgba(0, 0, 0, 0.4),
+          0 45px 95px rgba(0, 0, 0, 0.85),
+          0 0 70px rgba(255, 180, 60, 0.55),
+          inset 0 0 45px rgba(0, 0, 0, 0.7);
+      }
+
+      .portone::before {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 78%;
+        height: 84%;
+        border-radius: 130px 130px 12px 12px;
+        border: 4px double rgba(255, 220, 140, 0.55);
+        box-shadow: inset 0 0 35px rgba(255, 220, 140, 0.18);
+      }
+
+      .portone::after {
+        content: "";
+        position: absolute;
+        right: 54px;
+        top: 52%;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #fff3a8, #c47c16 55%, #5c3008);
+        box-shadow: 0 0 20px rgba(255, 220, 110, 0.9);
+      }
+
+      .simbolo {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: clamp(4rem, 12vw, 7rem);
+        color: rgba(255, 230, 160, 0.82);
+        text-shadow: 0 0 25px rgba(255, 190, 80, 0.75);
+        pointer-events: none;
+      }
+
+      .menu-stanze {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.45s ease;
+        z-index: 5;
+      }
+
+      .menu-stanze.attivo {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .pannello {
+        width: min(900px, 92vw);
+        padding: 34px;
+        border-radius: 28px;
+        background: rgba(15, 15, 15, 0.76);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 25px 90px rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        animation: comparsa 0.5s ease;
+      }
+
+      @keyframes comparsa {
+        from {
+          transform: scale(0.9) translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .pannello h2 {
+        font-size: clamp(1.8rem, 4vw, 3.2rem);
+        margin-bottom: 10px;
+        letter-spacing: 3px;
+      }
+
+      .pannello p {
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 28px;
+        font-size: 1rem;
+      }
+
+      .griglia-stanze {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+
+      .stanza {
+        min-height: 210px;
+        border-radius: 24px;
+        text-decoration: none;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        padding: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.22);
+        box-shadow:
+          inset 0 0 35px rgba(0, 0, 0, 0.35),
+          0 18px 40px rgba(0, 0, 0, 0.35);
+        transition:
+          transform 0.3s ease,
+          filter 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .stanza:hover {
+        transform: translateY(-12px) scale(1.03);
+        filter: brightness(1.12);
+        box-shadow:
+          inset 0 0 35px rgba(0, 0, 0, 0.25),
+          0 30px 65px rgba(0, 0, 0, 0.55);
+      }
+
+      .stanza .numero {
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        opacity: 0.85;
+      }
+
+      .stanza .titolo-stanza {
+        font-size: 1.35rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+
+      .stanza .spazio-titolo {
+        font-size: 0.86rem;
+        opacity: 0.85;
+        border-top: 1px solid rgba(255, 255, 255, 0.35);
+        padding-top: 12px;
+        width: 100%;
+      }
+
+      .arancione {
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(255, 255, 255, 0.35),
+            transparent 35%
+          ),
+          linear-gradient(145deg, #ffb000, #ff6a00, #8d2500);
+      }
+
+      .giallo-grigio {
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(255, 255, 255, 0.28),
+            transparent 35%
+          ),
+          linear-gradient(145deg, #d8c16a, #8d8974, #3f3d35);
+      }
+
+      .nero {
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(255, 255, 255, 0.18),
+            transparent 32%
+          ),
+          linear-gradient(145deg, #111, #000, #343434);
+      }
+
+      .bianco {
+        color: #1f1f1f;
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(255, 255, 255, 0.95),
+            transparent 38%
+          ),
+          linear-gradient(145deg, #ffffff, #e5dfd4, #bdbdbd);
+      }
+
+      .chiudi {
+        margin-top: 26px;
+        padding: 11px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 999px;
+        background: transparent;
+        color: white;
+        cursor: pointer;
+        font-family: inherit;
+        letter-spacing: 1px;
+        transition:
+          background 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .chiudi:hover {
+        background: rgba(255, 255, 255, 0.14);
+        transform: scale(1.05);
+      }
+
+      .macchia {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(2px);
+        opacity: 0.78;
+        animation: fluttua 8s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+
+      .m1 {
+        width: 90px;
+        height: 90px;
+        background: #ff6a00;
+        top: 20%;
+        left: 8%;
+      }
+      .m2 {
+        width: 130px;
+        height: 130px;
+        background: #ffffff;
+        top: 62%;
+        left: 10%;
+        animation-delay: 1s;
+      }
+      .m3 {
+        width: 80px;
+        height: 80px;
+        background: #111111;
+        top: 24%;
+        right: 12%;
+        animation-delay: 2s;
+      }
+      .m4 {
+        width: 110px;
+        height: 110px;
+        background: #d8c16a;
+        bottom: 10%;
+        right: 16%;
+        animation-delay: 3s;
+      }
+
+      @keyframes fluttua {
+        from {
+          transform: translateY(0) rotate(0deg) scale(1);
+        }
+        to {
+          transform: translateY(-35px) rotate(18deg) scale(1.12);
+        }
+      }
+
+      .insegna {
+        margin-bottom: 18px;
+        padding: 10px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(8px);
+        letter-spacing: 3px;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 25px rgba(255, 180, 80, 0.35);
+      }
+
+      .quadro {
+        position: absolute;
+        width: 150px;
+        height: 190px;
+        border: 10px solid rgba(255, 230, 180, 0.75);
+        background: rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.86);
+        box-shadow:
+          inset 0 0 30px rgba(255, 255, 255, 0.12),
+          0 20px 45px rgba(0, 0, 0, 0.55);
+        z-index: 1;
+      }
+
+      .quadro1 {
+        left: 8%;
+        top: 32%;
+        transform: rotate(-6deg);
+      }
+
+      .quadro2 {
+        left: 18%;
+        top: 58%;
+        transform: rotate(4deg);
+      }
+
+      .quadro3 {
+        right: 8%;
+        top: 32%;
+        transform: rotate(6deg);
+      }
+
+      .quadro4 {
+        right: 18%;
+        top: 58%;
+        transform: rotate(-4deg);
+      }
+
+      .targhetta {
+        position: absolute;
+        right: 7%;
+        bottom: 12%;
+        max-width: 240px;
+        padding: 16px 20px;
+        border-left: 4px solid #ffb347;
+        background: rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(10px);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+        z-index: 2;
+      }
+
+      .pavimento {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 100vw;
+        height: 32vh;
+        transform: translateX(-50%);
+        background:
+          linear-gradient(to top, rgba(0, 0, 0, 0.65), transparent),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.18) 0px,
+            rgba(255, 255, 255, 0.18) 2px,
+            transparent 2px,
+            transparent 90px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.12) 0px,
+            rgba(255, 255, 255, 0.12) 2px,
+            transparent 2px,
+            transparent 70px
+          );
+        clip-path: polygon(18% 100%, 82% 100%, 58% 0, 42% 0);
+        opacity: 0.55;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      @media (max-width: 800px) {
+        body {
+          overflow: auto;
+        }
+
+        .griglia-stanze {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .stanza {
+          min-height: 160px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          letter-spacing: 2px;
+        }
+
+        .griglia-stanze {
+          grid-template-columns: 1fr;
+        }
+
+        .pannello {
+          padding: 24px;
+        }
+
+        .quadro,
+        .targhetta,
+        .pavimento {
+          display: none;
+        }
+
+        .insegna {
+          font-size: 0.75rem;
+          padding: 8px 16px;
+        }
+      }
+
+      .portone.aperto {
+        transform: rotateY(35deg) scale(1.02);
+        transition: transform 0.6s ease;
+        transform-origin: left;
+      }
+
+      .luce-portone {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 220, 120, 0.4),
+          transparent 70%
+        );
+        filter: blur(25px);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        animation: pulsa 3s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+
+      @keyframes pulsa {
+        from {
+          opacity: 0.4;
+          transform: translate(-50%, -40%) scale(1);
+        }
+        to {
+          opacity: 0.8;
+          transform: translate(-50%, -40%) scale(1.2);
+        }
+      }
+
+      .portone:hover .simbolo {
+        transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
+      }
+
+      .frase {
+        margin-top: 14px;
+        font-size: 1.1rem;
+        font-style: italic;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.85);
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        animation: comparsaFrase 1.5s ease forwards;
+      }
+
+      @keyframes comparsaFrase {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 0.85;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+
+    <div class="macchia m1"></div>
+    <div class="macchia m2"></div>
+    <div class="macchia m3"></div>
+    <div class="macchia m4"></div>
+
+    <header>
+      <h1>Stanze dell'Io</h1>
+      <p class="sottotitolo">galleria interiore in quattro visioni</p>
+      <p class="frase" id="frase"></p>
+    </header>
+
+    <main>
+      <div class="quadro quadro1">Colore</div>
+      <div class="quadro quadro2">Memoria</div>
+      <div class="quadro quadro3">Ombra</div>
+      <div class="quadro quadro4">Luce</div>
+
+      <section class="portone-wrapper">
+        <div class="insegna">PORTONE D'INGRESSO</div>
+        <p class="alone-text">Premi il portone per entrare</p>
+
+        <button
+          class="portone"
+          id="apriPortone"
+          aria-label="Apri il portone d'ingresso"
+        >
+          <span class="simbolo">◊</span>
+        </button>
+
+        <div class="luce-portone"></div>
+      </section>
+
+      <div class="targhetta">
+        <strong>Installazione digitale</strong><br />
+        Percorso simbolico tra quattro stanze interiori
+      </div>
+
+      <div class="pavimento"></div>
+    </main>
+
+    <section class="menu-stanze" id="menuStanze">
+      <div class="pannello">
+        <h2>Scegli una stanza</h2>
+        <p>
+          Ogni colore è una soglia diversa dell'Io. Inserisci poi i titoli
+          definitivi delle stanze.
+        </p>
+
+        <div class="griglia-stanze">
+          <a href="stanza1.html" class="stanza arancione">
+            <span class="numero">Stanza I</span>
+            <span class="titolo-stanza">Il Meridiano dei Ricordi</span>
+            <span class="spazio-titolo">soglia della memoria</span>
+          </a>
+
+          <a href="stanza2.html" class="stanza giallo-grigio">
+            <span class="numero">Stanza II</span>
+            <span class="titolo-stanza"
+              >Soglia dell'immaginazione: la Biblioteca nella Notte</span
+            >
+            <span class="spazio-titolo"
+              >Una stanza scura, silenziosa e calda allo stesso tempo</span
+            >
+          </a>
+
+          <a href="stanza3.html" class="stanza nero">
+            <span class="numero">Stanza III</span>
+            <span class="titolo-stanza">La Rosa sotto Vetro</span>
+            <span class="spazio-titolo"
+              >Una stanza oscura e fragile ma vera</span
+            >
+          </a>
+
+          <a href="stanza4.html" class="stanza bianco">
+            <span class="numero">Stanza IV</span>
+            <span class="titolo-stanza">Sogno</span>
+            <span class="spazio-titolo"
+              >Una dimensione sospesa tra realtà e immaginazione</span
+            >
+          </a>
+        </div>
+
+        <button class="chiudi" id="chiudiMenu">Torna al portone</button>
+      </div>
+    </section>
+
+    <audio id="suonoPorta" src="sound/porta.mp3" preload="auto"></audio>
+    <audio id="suonoChiudi" src="sound/portachiusa.mp3" preload="auto"></audio>
+
+    <script>
+      const apriPortone = document.getElementById("apriPortone");
+      const menuStanze = document.getElementById("menuStanze");
+      const chiudiMenu = document.getElementById("chiudiMenu");
+      const suono = document.getElementById("suonoPorta");
+      const suonoChiudi = document.getElementById("suonoChiudi");
+
+      suono.volume = 0.7;
+      suono.playbackRate = 0.95;
+
+      apriPortone.addEventListener("click", () => {
+        suono.currentTime = 0;
+        suono.play();
+
+        apriPortone.classList.add("aperto");
+
+        setTimeout(() => {
+          menuStanze.classList.add("attivo");
+        }, 500);
+      });
+
+      chiudiMenu.addEventListener("click", () => {
+        if (suonoChiudi) {
+          suonoChiudi.currentTime = 0;
+          suonoChiudi.volume = 0.7;
+          suonoChiudi.playbackRate = 0.95;
+          suonoChiudi.play().catch(() => {});
+        }
+
+        menuStanze.classList.remove("attivo");
+        apriPortone.classList.remove("aperto");
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          if (suonoChiudi) {
+            suonoChiudi.currentTime = 0;
+            suonoChiudi.play().catch(() => {});
+          }
+
+          menuStanze.classList.remove("attivo");
+          apriPortone.classList.remove("aperto");
+        }
+      });
+
+      const frasi = [
+        "Ogni stanza è una versione di te.",
+        "Non tutte le porte portano fuori.",
+        "Il colore è memoria.",
+        "Ciò che scegli, ti definisce.",
+        "Dentro ogni stanza c’è una verità diversa.",
+        "Non stai entrando in un luogo, ma in te stesso.",
+      ];
+
+      function cambiaFrase() {
+        const fraseElemento = document.getElementById("frase");
+        fraseElemento.style.opacity = 0;
+
+        setTimeout(() => {
+          fraseElemento.textContent =
+            frasi[Math.floor(Math.random() * frasi.length)];
+          fraseElemento.style.opacity = 1;
+        }, 300);
+      }
+
+      // frase iniziale
+      cambiaFrase();
+
+      // cambia anche quando apri il portone
+      apriPortone.addEventListener("click", cambiaFrase);
+    </script>
+  </body>
+</html>
