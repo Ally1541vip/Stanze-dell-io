@@ -608,6 +608,102 @@
           transform: translateY(0);
         }
       }
+
+      .glitch-btn {
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+
+  padding: 8px 14px;
+
+  font-size: 0.72rem;
+  font-family: monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.15);
+
+  backdrop-filter: blur(6px);
+
+  box-shadow:
+    0 0 8px rgba(255,255,255,0.08),
+    inset 0 0 8px rgba(255,255,255,0.04);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    border 0.2s ease;
+
+  z-index: 999;
+}
+
+.glitch-btn:hover {
+  transform: scale(1.06);
+  opacity: 1;
+
+  border: 1px solid rgba(255,120,120,0.45);
+
+  animation: glitch 0.18s infinite;
+}
+
+.glitch-btn::before,
+.glitch-btn::after {
+  content: "return.exe";
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0.35;
+}
+
+.glitch-btn::before {
+  color: #ff004c;
+  transform: translate(-1px, 0);
+}
+
+.glitch-btn::after {
+  color: #00fff2;
+  transform: translate(1px, 0);
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 1px);
+  }
+
+  40% {
+    transform: translate(2px, -1px);
+  }
+
+  60% {
+    transform: translate(-1px, -1px);
+  }
+
+  80% {
+    transform: translate(1px, 1px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
     </style>
   </head>
   <body>
@@ -698,6 +794,12 @@
         <button class="chiudi" id="chiudiMenu">Torna al portone</button>
       </div>
     </section>
+
+    <a href="sito Marianna.exe/index.html" class="glitch-btn">
+  return.exe
+</a>
+
+<script>
 
     <audio id="suonoPorta" src="sound/porta.mp3" preload="auto"></audio>
     <audio id="suonoChiudi" src="sound/portachiusa.mp3" preload="auto"></audio>
