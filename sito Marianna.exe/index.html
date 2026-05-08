@@ -1,0 +1,2205 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Stanze dell'Io: una galleria interiore digitale corrotta, buggata e glitchata."
+    />
+    <title>Stanze dell'Io // CORRUPTED</title>
+
+    <style>
+      :root {
+        --ink: #030203;
+        --paper: #fff8ee;
+        --cream: #f8ead5;
+        --gold: #ffd47d;
+        --gold-soft: rgba(255, 212, 125, 0.58);
+        --amber: #ff9d22;
+        --orange: #ff6a00;
+        --brown: #56290b;
+        --black: #050505;
+        --white-soft: rgba(255, 255, 255, 0.84);
+        --white-muted: rgba(255, 255, 255, 0.68);
+        --line: rgba(255, 255, 255, 0.18);
+        --line-strong: rgba(255, 255, 255, 0.34);
+        --glass: rgba(10, 8, 6, 0.62);
+        --glass-heavy: rgba(10, 8, 6, 0.88);
+        --shadow: rgba(0, 0, 0, 0.72);
+        --shadow-heavy: rgba(0, 0, 0, 0.92);
+        --blur: blur(18px) saturate(1.8) contrast(1.2);
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-spring: cubic-bezier(0.18, 0.9, 0.22, 1.14);
+        --mx: 0px;
+        --my: 0px;
+        --glitch-x: 0px;
+        --glitch-y: 0px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+      }
+
+      html {
+        color-scheme: dark;
+        scroll-behavior: smooth;
+        background: #000;
+      }
+
+      body {
+        min-height: 100svh;
+        overflow: hidden;
+        font-family: Georgia, "Times New Roman", serif;
+        color: white;
+        background: var(--ink);
+        text-rendering: geometricPrecision;
+        cursor: crosshair;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        pointer-events: none;
+      }
+
+      body::before {
+        opacity: 0.22;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.08) 0 1px,
+            transparent 1px 3px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.035) 0 2px,
+            rgba(0, 255, 255, 0.035) 2px 4px,
+            transparent 4px 7px
+          );
+        mix-blend-mode: overlay;
+        animation: scanNoise 240ms steps(2) infinite;
+      }
+
+      body::after {
+        opacity: 0;
+        background: rgba(255, 255, 255, 0.88);
+        mix-blend-mode: difference;
+        animation: whiteCrash 7s steps(1) infinite;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      ::selection {
+        color: #0a0000;
+        background: #00fff7;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .page {
+        position: relative;
+        min-height: 100svh;
+        isolation: isolate;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at calc(12% + var(--mx)) calc(18% + var(--my)),
+            rgba(255, 0, 0, 0.85),
+            transparent 19rem
+          ),
+          radial-gradient(
+            circle at calc(88% - var(--mx)) calc(18% + var(--my)),
+            rgba(0, 255, 255, 0.8),
+            transparent 18rem
+          ),
+          radial-gradient(
+            circle at calc(18% + var(--mx)) calc(88% - var(--my)),
+            rgba(255, 221, 0, 0.55),
+            transparent 24rem
+          ),
+          radial-gradient(
+            circle at calc(82% - var(--mx)) calc(84% - var(--my)),
+            rgba(0, 0, 0, 1),
+            transparent 25rem
+          ),
+          linear-gradient(
+            135deg,
+            #ff6a00 0%,
+            #111 28%,
+            #520000 48%,
+            #00fff2 49%,
+            #070707 51%,
+            #fff8ee 100%
+          );
+        background-size: 155% 155%;
+        animation:
+          livingBackground 10s steps(6) infinite alternate,
+          screenTear 4.6s steps(1) infinite;
+      }
+
+      .page::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -5;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.86)),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.06) 0 1px,
+            transparent 1px 38px,
+            rgba(255, 0, 0, 0.12) 39px 41px,
+            transparent 41px 88px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(0, 255, 255, 0.06) 0 1px,
+            transparent 1px 31px
+          );
+        mask-image: radial-gradient(
+          circle at 50% 43%,
+          black 0 62%,
+          transparent 97%
+        );
+        animation: gridCorrupt 1.2s steps(3) infinite;
+      }
+
+      .page::after {
+        content: "ERROR 0xIO // MEMORY LEAK // DREAM_NOT_FOUND // SHADOW_OVERFLOW";
+        position: fixed;
+        inset: auto 0 1rem 0;
+        z-index: 80;
+        pointer-events: none;
+        padding: 0.45rem 0;
+        overflow: hidden;
+        white-space: nowrap;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.82rem;
+        letter-spacing: 0.3em;
+        color: rgba(0, 255, 255, 0.92);
+        background: rgba(0, 0, 0, 0.72);
+        text-shadow:
+          2px 0 red,
+          -2px 0 #00fff7,
+          0 0 0.8rem currentColor;
+        animation:
+          tickerBug 8s linear infinite,
+          textPanic 300ms steps(2) infinite;
+      }
+
+      @keyframes livingBackground {
+        from {
+          background-position: 0% 0%;
+          filter: hue-rotate(0deg) contrast(1.05);
+        }
+
+        to {
+          background-position: 100% 100%;
+          filter: hue-rotate(-25deg) contrast(1.65) saturate(1.7);
+        }
+      }
+
+      @keyframes screenTear {
+        0%,
+        88%,
+        100% {
+          transform: translate(0, 0) skew(0deg);
+        }
+        89% {
+          transform: translate(-10px, 3px) skew(1deg);
+        }
+        91% {
+          transform: translate(14px, -2px) skew(-1deg);
+        }
+        93% {
+          transform: translate(-4px, 0) skew(0.4deg);
+        }
+      }
+
+      @keyframes scanNoise {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(3px);
+        }
+      }
+
+      @keyframes whiteCrash {
+        0%,
+        93%,
+        100% {
+          opacity: 0;
+        }
+        94% {
+          opacity: 0.32;
+        }
+        95% {
+          opacity: 0;
+        }
+        97% {
+          opacity: 0.14;
+        }
+      }
+
+      @keyframes gridCorrupt {
+        0%,
+        100% {
+          transform: translate(0, 0);
+          opacity: 1;
+        }
+        40% {
+          transform: translate(8px, -2px);
+          opacity: 0.72;
+        }
+        70% {
+          transform: translate(-12px, 3px);
+          opacity: 0.9;
+        }
+      }
+
+      @keyframes tickerBug {
+        from {
+          text-indent: 100%;
+        }
+        to {
+          text-indent: -100%;
+        }
+      }
+
+      @keyframes textPanic {
+        0% {
+          clip-path: inset(0 0 0 0);
+        }
+        50% {
+          clip-path: inset(14% 0 18% 0);
+        }
+        100% {
+          clip-path: inset(0 0 0 0);
+        }
+      }
+
+      .grain {
+        position: fixed;
+        inset: -40%;
+        z-index: -2;
+        pointer-events: none;
+        opacity: 0.32;
+        background-image:
+          radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.8) 0 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle,
+            rgba(0, 255, 255, 0.5) 0 1px,
+            transparent 1px
+          ),
+          radial-gradient(circle, rgba(255, 0, 0, 0.5) 0 1px, transparent 1px);
+        background-size:
+          4rem 4rem,
+          6rem 6rem,
+          5rem 5rem;
+        animation: grainDrift 620ms steps(6) infinite;
+      }
+
+      @keyframes grainDrift {
+        to {
+          translate: 6rem -4rem;
+        }
+      }
+
+      .vignette {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            circle at center,
+            transparent 0 45%,
+            rgba(0, 0, 0, 0.72) 100%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.14),
+            transparent 45%,
+            rgba(0, 255, 255, 0.13)
+          );
+        mix-blend-mode: multiply;
+      }
+
+      #particles {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        image-rendering: pixelated;
+      }
+
+      .aurora {
+        position: fixed;
+        inset: -22vmax;
+        z-index: -3;
+        pointer-events: none;
+        filter: blur(34px) contrast(2.3) saturate(2.5);
+        opacity: 0.85;
+        transform: translate3d(
+          calc(var(--mx) * -0.35),
+          calc(var(--my) * -0.35),
+          0
+        );
+        animation: auroraCrash 2.8s steps(4) infinite;
+      }
+
+      .aurora::before,
+      .aurora::after {
+        content: "";
+        position: absolute;
+        width: 58vmax;
+        aspect-ratio: 1;
+        border-radius: 999px;
+        mix-blend-mode: screen;
+        animation: auroraMove 5s steps(5) infinite alternate;
+      }
+
+      .aurora::before {
+        left: 6%;
+        top: 8%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 0, 55, 0.92),
+          transparent 64%
+        );
+      }
+
+      .aurora::after {
+        right: 5%;
+        bottom: 2%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 255, 255, 0.8),
+          transparent 66%
+        );
+        animation-delay: -1s;
+      }
+
+      @keyframes auroraMove {
+        to {
+          transform: translate3d(8vmax, -5vmax, 0) scale(1.35) rotate(28deg);
+        }
+      }
+
+      @keyframes auroraCrash {
+        0%,
+        100% {
+          opacity: 0.72;
+        }
+        40% {
+          opacity: 0.2;
+        }
+        55% {
+          opacity: 1;
+        }
+      }
+
+      .orbs {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .orb {
+        --size: 7rem;
+        --duration: 2.2s;
+        --delay: 0s;
+        position: absolute;
+        width: var(--size);
+        aspect-ratio: 1;
+        border-radius: 24% 76% 40% 60%;
+        opacity: 0.78;
+        filter: blur(1px) contrast(1.8);
+        transform: translate3d(0, 0, 0);
+        animation:
+          floatOrb var(--duration) steps(4) infinite alternate,
+          orbBreak 850ms steps(2) infinite;
+        animation-delay: var(--delay);
+      }
+
+      .orb:nth-child(1) {
+        --size: clamp(4.4rem, 7vw, 6.2rem);
+        left: 7%;
+        top: 19%;
+        background: #ff003c;
+      }
+      .orb:nth-child(2) {
+        --size: clamp(6rem, 9vw, 8.7rem);
+        --delay: -0.8s;
+        left: 8%;
+        top: 64%;
+        background: #fff4df;
+      }
+      .orb:nth-child(3) {
+        --size: clamp(3.9rem, 6vw, 5.4rem);
+        --delay: -1.2s;
+        right: 11%;
+        top: 23%;
+        background: #00fff7;
+      }
+      .orb:nth-child(4) {
+        --size: clamp(5.3rem, 8vw, 7.5rem);
+        --delay: -1.5s;
+        right: 15%;
+        bottom: 10%;
+        background: #d8c16a;
+      }
+      .orb:nth-child(5) {
+        --size: 3.3rem;
+        --delay: -0.6s;
+        left: 50%;
+        top: 18%;
+        background: rgba(255, 0, 221, 0.72);
+      }
+
+      @keyframes floatOrb {
+        to {
+          transform: translate3d(3.2rem, -4.6rem, 0) rotate(35deg) scale(1.2);
+        }
+      }
+
+      @keyframes orbBreak {
+        0%,
+        100% {
+          clip-path: inset(0 0 0 0);
+        }
+        50% {
+          clip-path: polygon(0 0, 100% 8%, 84% 38%, 100% 100%, 0 90%, 20% 45%);
+        }
+      }
+
+      .header {
+        position: relative;
+        z-index: 4;
+        padding: clamp(1.8rem, 4.8vw, 3.25rem) 1.2rem 0;
+        text-align: center;
+        animation: titleReveal 700ms steps(5) both;
+      }
+
+      @keyframes titleReveal {
+        from {
+          opacity: 0;
+          transform: translateY(-1rem) scale(0.98);
+          filter: blur(0.4rem);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.58rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.44);
+        backdrop-filter: var(--blur);
+        color: rgba(255, 255, 255, 0.86);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        box-shadow:
+          0 0 2.4rem rgba(255, 0, 0, 0.32),
+          0 0 1.2rem rgba(0, 255, 255, 0.28),
+          inset 0 0 1.5rem rgba(255, 255, 255, 0.045);
+        animation: brokenLabel 1.4s steps(2) infinite;
+      }
+
+      .eyebrow::before,
+      .eyebrow::after {
+        content: "//";
+        color: #00fff7;
+        font-size: 0.74rem;
+        text-shadow: 2px 0 red;
+      }
+
+      @keyframes brokenLabel {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        48% {
+          transform: translate(-2px, 1px);
+        }
+        50% {
+          transform: translate(4px, -1px);
+        }
+      }
+
+      h1 {
+        position: relative;
+        margin-top: 0.95rem;
+        font-size: clamp(3rem, 8.3vw, 7.8rem);
+        line-height: 0.9;
+        letter-spacing: clamp(0.055em, 0.72vw, 0.17em);
+        text-transform: uppercase;
+        text-wrap: balance;
+        text-shadow:
+          4px 0 0 rgba(255, 0, 0, 0.75),
+          -4px 0 0 rgba(0, 255, 255, 0.75),
+          0 0 1.4rem rgba(255, 255, 255, 0.54),
+          0 0 3.5rem rgba(255, 140, 0, 0.42);
+        animation: titleGlitch 1.9s steps(2) infinite;
+      }
+
+      h1::before,
+      h1::after {
+        content: "Stanze dell'Io";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.72;
+        mix-blend-mode: screen;
+      }
+
+      h1::before {
+        color: #ff003c;
+        transform: translate(-0.055em, 0.025em);
+        clip-path: inset(0 0 52% 0);
+        animation: sliceOne 740ms steps(2) infinite;
+      }
+
+      h1::after {
+        color: #00fff7;
+        transform: translate(0.055em, -0.025em);
+        clip-path: inset(48% 0 0 0);
+        animation: sliceTwo 980ms steps(2) infinite;
+      }
+
+      h1 span {
+        display: inline-block;
+        background: linear-gradient(
+          180deg,
+          #fffdf7 0%,
+          #ffd98b 42%,
+          #00fff7 43%,
+          #ff003c 47%,
+          #c68120 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 1.1rem rgba(255, 0, 47, 0.4));
+      }
+
+      @keyframes titleGlitch {
+        0%,
+        92%,
+        100% {
+          transform: translate(0, 0);
+        }
+        93% {
+          transform: translate(-6px, 2px) skewX(4deg);
+        }
+        94% {
+          transform: translate(8px, -3px) skewX(-3deg);
+        }
+      }
+
+      @keyframes sliceOne {
+        0%,
+        100% {
+          transform: translate(-0.055em, 0.025em);
+        }
+        50% {
+          transform: translate(-0.14em, -0.015em);
+        }
+      }
+
+      @keyframes sliceTwo {
+        0%,
+        100% {
+          transform: translate(0.055em, -0.025em);
+        }
+        50% {
+          transform: translate(0.18em, 0.035em);
+        }
+      }
+
+      .subtitle {
+        max-width: 50rem;
+        margin: 0.95rem auto 0;
+        color: var(--white-muted);
+        font-size: clamp(1rem, 1.7vw, 1.28rem);
+        line-height: 1.55;
+        letter-spacing: 0.14em;
+        text-shadow:
+          2px 0 rgba(255, 0, 0, 0.55),
+          -2px 0 rgba(0, 255, 255, 0.45);
+      }
+
+      .phrase {
+        min-height: 1.8rem;
+        margin-top: 0.9rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: clamp(1rem, 1.5vw, 1.14rem);
+        font-style: italic;
+        letter-spacing: 0.055em;
+        text-shadow:
+          2px 0 red,
+          -2px 0 cyan,
+          0 0 1rem rgba(0, 0, 0, 0.78);
+        transition:
+          opacity 120ms steps(2),
+          transform 120ms steps(2),
+          filter 120ms steps(2);
+        animation: phraseCorrupt 2s steps(2) infinite;
+      }
+
+      .phrase.is-changing {
+        opacity: 0;
+        transform: translateY(0.45rem) skewX(12deg);
+        filter: blur(0.25rem);
+      }
+
+      @keyframes phraseCorrupt {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        42% {
+          transform: translate(1px, -1px);
+        }
+        44% {
+          transform: translate(-4px, 1px);
+        }
+      }
+
+      .stage {
+        position: relative;
+        z-index: 3;
+        min-height: 0;
+        display: grid;
+        place-items: center;
+        padding: clamp(1.2rem, 2.5vw, 2rem) 1.2rem 4.2rem;
+      }
+
+      .gallery-card {
+        --rx: 0deg;
+        position: absolute;
+        z-index: 1;
+        width: clamp(6.8rem, 12vw, 9.7rem);
+        aspect-ratio: 0.78;
+        display: grid;
+        place-items: center;
+        padding: 1rem;
+        border: clamp(0.45rem, 1vw, 0.65rem) solid rgba(255, 230, 180, 0.72);
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.11) 0 2px,
+            transparent 2px 5px
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 0, 0, 0.12),
+            rgba(0, 255, 255, 0.15)
+          ),
+          rgba(0, 0, 0, 0.38);
+        backdrop-filter: blur(8px) contrast(1.8);
+        color: rgba(255, 255, 255, 0.86);
+        text-align: center;
+        font-family: Consolas, "Courier New", monospace;
+        letter-spacing: 0.14em;
+        box-shadow:
+          inset 0 0 2rem rgba(255, 255, 255, 0.08),
+          0 1.4rem 2.8rem rgba(0, 0, 0, 0.5),
+          4px 0 rgba(255, 0, 0, 0.4),
+          -4px 0 rgba(0, 255, 255, 0.35);
+        transform: translate3d(
+            calc(var(--mx) * var(--depth, 0.25)),
+            calc(var(--my) * var(--depth, 0.25)),
+            0
+          )
+          rotate(var(--rx));
+        transition: transform 180ms steps(2);
+        animation: frameBug 1.1s steps(3) infinite;
+      }
+
+      .gallery-card:nth-of-type(1) {
+        --rx: -12deg;
+        --depth: -0.35;
+        left: clamp(1rem, 8vw, 8rem);
+        top: 19%;
+      }
+      .gallery-card:nth-of-type(2) {
+        --rx: 9deg;
+        --depth: 0.2;
+        left: clamp(2rem, 18vw, 16rem);
+        top: 58%;
+      }
+      .gallery-card:nth-of-type(3) {
+        --rx: 14deg;
+        --depth: 0.32;
+        right: clamp(1rem, 8vw, 8rem);
+        top: 19%;
+      }
+      .gallery-card:nth-of-type(4) {
+        --rx: -9deg;
+        --depth: -0.22;
+        right: clamp(2rem, 18vw, 16rem);
+        top: 58%;
+      }
+
+      @keyframes frameBug {
+        0%,
+        100% {
+          filter: hue-rotate(0deg);
+          clip-path: inset(0);
+        }
+        45% {
+          filter: hue-rotate(90deg);
+          clip-path: inset(8% 0 0 0);
+        }
+        52% {
+          filter: invert(0.2);
+          clip-path: inset(0 0 11% 0);
+        }
+      }
+
+      .floor {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        z-index: 0;
+        width: 100vw;
+        height: min(33svh, 21.5rem);
+        translate: -50% 0;
+        clip-path: polygon(17% 100%, 83% 100%, 58% 0, 42% 0);
+        opacity: 0.7;
+        background:
+          linear-gradient(to top, rgba(0, 0, 0, 0.82), transparent),
+          repeating-linear-gradient(
+            90deg,
+            rgba(0, 255, 255, 0.22) 0 2px,
+            transparent 2px 5.9rem
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 0, 0, 0.18) 0 2px,
+            transparent 2px 4.6rem
+          );
+        pointer-events: none;
+        transform: translate3d(
+          calc(var(--mx) * -0.12),
+          calc(var(--my) * -0.06),
+          0
+        );
+        animation: floorCrash 650ms steps(4) infinite;
+      }
+
+      @keyframes floorCrash {
+        0%,
+        100% {
+          opacity: 0.58;
+        }
+        50% {
+          opacity: 0.2;
+          transform: translateX(9px);
+        }
+      }
+
+      .plaque {
+        position: absolute;
+        right: clamp(1rem, 7vw, 7rem);
+        bottom: clamp(1.4rem, 9vh, 5.8rem);
+        z-index: 4;
+        max-width: 17.5rem;
+        padding: 1rem 1.15rem;
+        border-left: 0.25rem solid #00fff7;
+        background: rgba(0, 0, 0, 0.42);
+        backdrop-filter: var(--blur);
+        color: rgba(255, 255, 255, 0.88);
+        font-family: Consolas, "Courier New", monospace;
+        line-height: 1.52;
+        box-shadow:
+          0 1rem 2.8rem rgba(0, 0, 0, 0.42),
+          3px 0 rgba(255, 0, 0, 0.45),
+          -3px 0 rgba(0, 255, 255, 0.45);
+        transform: translate3d(
+          calc(var(--mx) * 0.18),
+          calc(var(--my) * 0.12),
+          0
+        );
+        transition: transform 160ms steps(2);
+      }
+
+      .door-area {
+        position: relative;
+        z-index: 3;
+        display: grid;
+        justify-items: center;
+        animation: doorReveal 650ms steps(4) both;
+      }
+
+      @keyframes doorReveal {
+        from {
+          opacity: 0;
+          transform: translateY(1.4rem) scale(0.96);
+          filter: blur(0.5rem);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      .sign {
+        margin-bottom: 1rem;
+        padding: 0.7rem 1.48rem;
+        border: 1px solid rgba(255, 255, 255, 0.44);
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.58);
+        backdrop-filter: var(--blur);
+        color: rgba(255, 255, 255, 0.9);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.88rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        box-shadow:
+          0 0 2rem rgba(255, 0, 0, 0.28),
+          0 0 2rem rgba(0, 255, 255, 0.24),
+          inset 0 0 1.5rem rgba(255, 255, 255, 0.045);
+      }
+
+      .instruction {
+        margin-bottom: 1.35rem;
+        color: rgba(255, 255, 255, 0.86);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 1.05rem;
+        letter-spacing: 0.12em;
+        text-shadow:
+          2px 0 red,
+          -2px 0 cyan,
+          0 0 0.8rem rgba(0, 0, 0, 0.82);
+      }
+
+      .door-wrap {
+        position: relative;
+        perspective: 1100px;
+        transform-style: preserve-3d;
+        transform: translate3d(
+          calc(var(--mx) * -0.22),
+          calc(var(--my) * -0.16),
+          0
+        );
+        transition: transform 180ms steps(2);
+      }
+
+      .door-glow,
+      .door-rays {
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .door-glow {
+        inset: 10% 0 auto 50%;
+        width: min(27rem, 80vw);
+        aspect-ratio: 1;
+        translate: -50% 0;
+        border-radius: 999px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 255, 255, 0.48),
+          transparent 68%
+        );
+        filter: blur(1.9rem);
+        animation: pulseGlow 680ms steps(3) infinite alternate;
+      }
+
+      .door-rays {
+        inset: -3rem -5rem;
+        opacity: 0.5;
+        background: conic-gradient(
+          from 210deg at 50% 42%,
+          transparent 0deg,
+          rgba(255, 0, 0, 0.42) 16deg,
+          transparent 30deg,
+          transparent 72deg,
+          rgba(0, 255, 255, 0.38) 88deg,
+          transparent 104deg,
+          transparent 360deg
+        );
+        filter: blur(1rem);
+        animation: rotateRays 2.2s steps(10) infinite;
+      }
+
+      @keyframes pulseGlow {
+        to {
+          opacity: 0.42;
+          scale: 1.38;
+        }
+      }
+
+      @keyframes rotateRays {
+        to {
+          rotate: 1turn;
+        }
+      }
+
+      .door-frame {
+        position: absolute;
+        inset: -1.1rem -1rem -1.25rem;
+        border-radius: 12rem 12rem 1.45rem 1.45rem;
+        background:
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.22) 0 4px,
+            rgba(0, 255, 255, 0.2) 4px 8px,
+            transparent 8px 16px
+          ),
+          linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.72),
+            rgba(255, 255, 255, 0.11),
+            rgba(0, 0, 0, 0.78)
+          );
+        box-shadow:
+          inset 0 0 1.8rem rgba(255, 230, 160, 0.18),
+          0 2.1rem 4rem rgba(0, 0, 0, 0.58);
+        pointer-events: none;
+        animation: doorFrameCorrupt 1.8s steps(4) infinite;
+      }
+
+      @keyframes doorFrameCorrupt {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        45% {
+          transform: translate(-5px, 0);
+        }
+        47% {
+          transform: translate(8px, -2px);
+        }
+      }
+
+      .door {
+        position: relative;
+        width: min(20.6rem, 72vw);
+        height: min(31.4rem, 58svh);
+        min-height: 22rem;
+        cursor: pointer;
+        border-radius: 11rem 11rem 1.1rem 1.1rem;
+        color: rgba(255, 230, 160, 0.9);
+        background:
+          linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 0.38),
+            transparent 17%,
+            rgba(0, 255, 255, 0.22) 48%,
+            transparent 82%,
+            rgba(255, 0, 221, 0.28)
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.075) 0 1px,
+            transparent 1px 1.2rem
+          ),
+          repeating-linear-gradient(
+            0deg,
+            transparent 0 1.6rem,
+            rgba(0, 0, 0, 0.28) 1.6rem 1.75rem
+          ),
+          linear-gradient(
+            135deg,
+            #3f1f08 0%,
+            #a45616 42%,
+            #5b2b0d 63%,
+            #1f0e05 100%
+          );
+        box-shadow:
+          0 0 0 0.62rem rgba(255, 255, 255, 0.13),
+          0 0 0 1.08rem rgba(0, 0, 0, 0.36),
+          0 2.5rem 5.8rem rgba(0, 0, 0, 0.74),
+          0 0 3rem rgba(0, 255, 255, 0.22),
+          inset 0 0 3.6rem rgba(0, 0, 0, 0.74),
+          inset 0.7rem 0 1.2rem rgba(255, 0, 0, 0.18),
+          inset -0.8rem 0 1.4rem rgba(0, 255, 255, 0.16);
+        transform-origin: left center;
+        transform-style: preserve-3d;
+        will-change: transform, filter, clip-path;
+        transition:
+          transform 170ms steps(2),
+          box-shadow 170ms steps(2),
+          filter 170ms steps(2);
+        animation: doorIdleBug 1.1s steps(3) infinite;
+      }
+
+      .door::before {
+        content: "";
+        position: absolute;
+        inset: 2.15rem 10.5% 2.4rem;
+        border: 0.25rem double rgba(255, 220, 140, 0.6);
+        border-radius: 9.2rem 9.2rem 0.85rem 0.85rem;
+        box-shadow:
+          inset 0 0 2.2rem rgba(255, 0, 0, 0.2),
+          0 0 1.2rem rgba(0, 255, 255, 0.24);
+      }
+
+      .door::after {
+        content: "";
+        position: absolute;
+        right: 16.8%;
+        top: 52%;
+        width: 1.32rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 34% 30%,
+          #fff8c4,
+          #00fff7 38%,
+          #ce1b1b 58%,
+          #452104 100%
+        );
+        box-shadow:
+          0 0 1.25rem rgba(0, 255, 255, 0.9),
+          0 0 2.5rem rgba(255, 0, 0, 0.45);
+        animation: knobError 480ms steps(2) infinite;
+      }
+
+      @keyframes knobError {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(5px, -2px);
+        }
+      }
+
+      @keyframes doorIdleBug {
+        0%,
+        100% {
+          filter: none;
+          clip-path: inset(0);
+        }
+        43% {
+          filter: contrast(1.5) saturate(2);
+          clip-path: inset(0 0 0 0);
+        }
+        46% {
+          filter: invert(0.1) hue-rotate(80deg);
+          clip-path: inset(6% 0 4% 0);
+        }
+      }
+
+      .door-shine {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .door-shine::before {
+        content: "";
+        position: absolute;
+        inset: -40% auto -40% -60%;
+        width: 48%;
+        transform: rotate(18deg);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.22),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 120ms steps(2);
+      }
+
+      .door:hover,
+      .door:focus-visible {
+        outline: 0;
+        transform: translateY(-0.42rem) scale(1.035) rotateX(1deg) skewX(-1deg);
+        filter: brightness(1.2) saturate(1.7) contrast(1.5);
+        box-shadow:
+          0 0 0 0.62rem rgba(255, 255, 255, 0.19),
+          0 0 0 1.08rem rgba(0, 0, 0, 0.42),
+          0 3.1rem 6.4rem rgba(0, 0, 0, 0.85),
+          0 0 5rem rgba(255, 0, 0, 0.52),
+          0 0 5rem rgba(0, 255, 255, 0.38),
+          inset 0 0 3.6rem rgba(0, 0, 0, 0.72);
+      }
+
+      .door:hover .door-shine::before,
+      .door:focus-visible .door-shine::before {
+        opacity: 1;
+        animation: shineSweep 420ms steps(3);
+      }
+
+      @keyframes shineSweep {
+        from {
+          translate: 0 0;
+        }
+        to {
+          translate: 430% 0;
+        }
+      }
+
+      .door.is-open {
+        transform: rotateY(-44deg) translateX(-0.8rem) scale(1.018) skewY(2deg);
+        filter: contrast(1.6) saturate(1.8);
+        box-shadow:
+          0 0 0 0.62rem rgba(255, 255, 255, 0.17),
+          0 0 0 1.08rem rgba(0, 0, 0, 0.42),
+          0 3rem 6rem rgba(0, 0, 0, 0.82),
+          0 0 5.2rem rgba(0, 255, 255, 0.54),
+          inset 0 0 3.6rem rgba(0, 0, 0, 0.72);
+      }
+
+      .symbol {
+        position: absolute;
+        left: 50%;
+        top: 44.5%;
+        translate: -50% -50%;
+        font-size: clamp(4.4rem, 12vw, 7.2rem);
+        line-height: 1;
+        text-shadow:
+          4px 0 rgba(255, 0, 0, 0.9),
+          -4px 0 rgba(0, 255, 255, 0.8),
+          0 0 1.6rem rgba(255, 190, 80, 0.78);
+        transition:
+          transform 140ms steps(2),
+          opacity 140ms steps(2);
+        pointer-events: none;
+        animation: symbolGlitch 520ms steps(2) infinite;
+      }
+
+      @keyframes symbolGlitch {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(-8px, 3px) scale(1.08) rotate(12deg);
+        }
+      }
+
+      .door:hover .symbol,
+      .door:focus-visible .symbol {
+        transform: scale(1.25) rotate(18deg);
+      }
+
+      .door.is-open .symbol {
+        opacity: 0.46;
+        transform: scale(0.95) rotate(-8deg);
+      }
+
+      .room-menu {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        display: grid;
+        place-items: center;
+        padding: 1.4rem;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 180ms steps(2),
+          visibility 180ms steps(2);
+      }
+
+      .room-menu.is-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .room-menu__backdrop {
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.06) 0 1px,
+            transparent 1px 4px
+          ),
+          radial-gradient(
+            circle at calc(50% + var(--mx)) calc(46% + var(--my)),
+            rgba(0, 255, 255, 0.2),
+            transparent 38rem
+          ),
+          rgba(0, 0, 0, 0.64);
+        backdrop-filter: blur(6px) saturate(1.8) contrast(1.4);
+      }
+
+      .panel {
+        position: relative;
+        width: min(64rem, 94vw);
+        max-height: min(84svh, 50rem);
+        overflow: auto;
+        overscroll-behavior: contain;
+        padding: clamp(1.35rem, 4vw, 2.35rem);
+        border: 1px solid rgba(255, 255, 255, 0.23);
+        border-radius: clamp(0.4rem, 3vw, 1.2rem);
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.04) 0 2px,
+            transparent 2px 7px
+          ),
+          radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 0, 0, 0.14),
+            transparent 42%
+          ),
+          linear-gradient(180deg, rgba(0, 255, 255, 0.09), transparent 29%),
+          var(--glass-heavy);
+        backdrop-filter: blur(22px) saturate(2) contrast(1.3);
+        box-shadow:
+          0 1.8rem 6.2rem rgba(0, 0, 0, 0.8),
+          5px 0 rgba(255, 0, 0, 0.42),
+          -5px 0 rgba(0, 255, 255, 0.42),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        text-align: center;
+        transform: translateY(1.9rem) scale(0.93) skewX(-1deg);
+        filter: blur(0.28rem);
+        transition:
+          transform 260ms steps(3),
+          filter 260ms steps(3);
+        animation: panelBug 1.3s steps(2) infinite;
+      }
+
+      .room-menu.is-visible .panel {
+        transform: translateY(0) scale(1) skewX(0deg);
+        filter: blur(0);
+      }
+
+      @keyframes panelBug {
+        0%,
+        100% {
+          clip-path: inset(0);
+        }
+        48% {
+          clip-path: inset(0 0 6% 0);
+        }
+        52% {
+          clip-path: inset(3% 0 0 0);
+        }
+      }
+
+      .panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background: radial-gradient(
+          circle at var(--spot-x, 50%) var(--spot-y, 0%),
+          rgba(255, 255, 255, 0.12),
+          transparent 22rem
+        );
+        opacity: 0.9;
+      }
+
+      .panel h2 {
+        position: relative;
+        font-size: clamp(1.9rem, 4vw, 3.45rem);
+        line-height: 1;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        text-shadow:
+          3px 0 red,
+          -3px 0 cyan,
+          0 0 2.4rem rgba(255, 180, 80, 0.26);
+      }
+
+      .panel > p {
+        position: relative;
+        max-width: 46rem;
+        margin: 0.86rem auto 1.95rem;
+        color: var(--white-muted);
+        font-family: Consolas, "Courier New", monospace;
+        line-height: 1.65;
+      }
+
+      .rooms {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.05rem;
+      }
+
+      .room {
+        --room-a: #ffb000;
+        --room-b: #ff6a00;
+        --room-c: #8d2500;
+        --delay: 0ms;
+        position: relative;
+        min-height: 13.8rem;
+        overflow: hidden;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 0.82rem;
+        padding: 1.12rem;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 0.7rem;
+        text-decoration: none;
+        isolation: isolate;
+        font-family: Consolas, "Courier New", monospace;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.09) 0 2px,
+            transparent 2px 6px
+          ),
+          radial-gradient(
+            circle at var(--card-x, 50%) var(--card-y, 0%),
+            rgba(255, 255, 255, 0.44),
+            transparent 38%
+          ),
+          linear-gradient(145deg, var(--room-a), var(--room-b), var(--room-c));
+        box-shadow:
+          inset 0 0 2.15rem rgba(0, 0, 0, 0.33),
+          0 1rem 2.5rem rgba(0, 0, 0, 0.34),
+          3px 0 rgba(255, 0, 0, 0.38),
+          -3px 0 rgba(0, 255, 255, 0.36);
+        opacity: 0;
+        transform: translateY(1.2rem) scale(0.96);
+        transition:
+          transform 130ms steps(2),
+          filter 130ms steps(2),
+          box-shadow 130ms steps(2),
+          opacity 130ms steps(2);
+      }
+
+      .room-menu.is-visible .room {
+        animation:
+          cardIn 360ms steps(4) forwards,
+          cardBreak 1s steps(3) infinite;
+        animation-delay: var(--delay), calc(var(--delay) + 200ms);
+      }
+
+      @keyframes cardIn {
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes cardBreak {
+        0%,
+        100% {
+          clip-path: inset(0);
+        }
+        44% {
+          clip-path: inset(0 0 12% 0);
+        }
+        48% {
+          clip-path: inset(9% 0 0 0);
+        }
+      }
+
+      .room::before {
+        content: "";
+        position: absolute;
+        inset: -44%;
+        z-index: -1;
+        background: conic-gradient(
+          from 90deg,
+          transparent,
+          rgba(255, 255, 255, 0.24),
+          transparent 34%
+        );
+        opacity: 0;
+        transition:
+          opacity 120ms steps(2),
+          rotate 320ms steps(3);
+      }
+
+      .room::after {
+        content: "CORRUPTED";
+        position: absolute;
+        inset: auto 0 0 0;
+        z-index: -1;
+        padding: 0.2rem;
+        background: rgba(0, 0, 0, 0.52);
+        color: rgba(255, 255, 255, 0.38);
+        font-size: 0.62rem;
+        letter-spacing: 0.4em;
+        opacity: 0.7;
+      }
+
+      .room:hover,
+      .room:focus-visible {
+        outline: 0;
+        transform: translateY(-0.78rem) scale(1.03) skewX(-2deg);
+        filter: brightness(1.35) saturate(1.6) contrast(1.4);
+        box-shadow:
+          inset 0 0 2rem rgba(0, 0, 0, 0.24),
+          0 1.9rem 4.2rem rgba(0, 0, 0, 0.58),
+          0 0 3rem rgba(0, 255, 255, 0.28);
+      }
+
+      .room:hover::before,
+      .room:focus-visible::before {
+        opacity: 1;
+        rotate: 24deg;
+      }
+
+      .room[data-theme="memory"] {
+        --room-a: #ffb000;
+        --room-b: #ff003c;
+        --room-c: #250000;
+      }
+      .room[data-theme="imagination"] {
+        --room-a: #e1ca74;
+        --room-b: #00fff7;
+        --room-c: #080808;
+      }
+      .room[data-theme="shadow"] {
+        --room-a: #343434;
+        --room-b: #050505;
+        --room-c: #ff003c;
+      }
+      .room[data-theme="dream"] {
+        --room-a: #ffffff;
+        --room-b: #ff00dd;
+        --room-c: #00fff7;
+        color: #111;
+      }
+
+      .room__number {
+        font-size: 0.74rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        opacity: 0.86;
+      }
+
+      .room__title {
+        font-size: clamp(1.08rem, 1.62vw, 1.42rem);
+        font-weight: 700;
+        line-height: 1.17;
+        text-wrap: balance;
+        text-shadow:
+          2px 0 red,
+          -2px 0 cyan;
+      }
+
+      .room__desc {
+        width: 100%;
+        padding-top: 0.82rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.35);
+        font-size: 0.84rem;
+        line-height: 1.36;
+        opacity: 0.86;
+      }
+
+      .room[data-theme="dream"] .room__desc {
+        border-color: rgba(0, 0, 0, 0.22);
+      }
+
+      .panel-actions {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-top: 1.7rem;
+      }
+
+      .ghost-button {
+        min-height: 2.78rem;
+        padding: 0.72rem 1.38rem;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 999px;
+        cursor: pointer;
+        color: white;
+        background: rgba(255, 255, 255, 0.065);
+        font-family: Consolas, "Courier New", monospace;
+        letter-spacing: 0.08em;
+        transition:
+          background 120ms steps(2),
+          transform 120ms steps(2),
+          border-color 120ms steps(2),
+          box-shadow 120ms steps(2);
+      }
+
+      .ghost-button:hover,
+      .ghost-button:focus-visible {
+        outline: 0;
+        transform: translateY(-0.16rem) scale(1.035) skewX(3deg);
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.58);
+        box-shadow: 0 0 2rem rgba(0, 255, 255, 0.22);
+      }
+
+      .is-entering .page,
+      .is-entering .room-menu {
+        animation: enterRoom 700ms steps(8) forwards;
+        transform-origin: center center;
+      }
+
+      @keyframes enterRoom {
+        0% {
+          scale: 1;
+          filter: brightness(1) blur(0);
+          clip-path: inset(0);
+        }
+        35% {
+          scale: 1.16;
+          filter: brightness(2) contrast(2) blur(0.04rem);
+          clip-path: inset(12% 0 0 0);
+        }
+        58% {
+          scale: 0.94;
+          filter: invert(1) hue-rotate(180deg);
+          clip-path: inset(0 0 18% 0);
+        }
+        100% {
+          scale: 1.95;
+          filter: brightness(0) blur(0.38rem);
+          clip-path: inset(50% 50% 50% 50%);
+        }
+      }
+
+      @media (max-width: 58rem) {
+        body {
+          overflow: auto;
+        }
+        .page {
+          min-height: 100dvh;
+        }
+        .stage {
+          padding-bottom: 5rem;
+        }
+        .gallery-card,
+        .plaque,
+        .floor {
+          display: none;
+        }
+        .rooms {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .room {
+          min-height: 11.2rem;
+        }
+      }
+
+      @media (max-width: 35rem) {
+        .header {
+          padding-top: 1.55rem;
+        }
+        h1 {
+          letter-spacing: 0.04em;
+        }
+        .subtitle {
+          letter-spacing: 0.075em;
+        }
+        .eyebrow,
+        .sign {
+          letter-spacing: 0.12em;
+        }
+        .instruction {
+          text-align: center;
+          letter-spacing: 0.07em;
+        }
+        .door {
+          width: min(18rem, 76vw);
+          min-height: 20rem;
+        }
+        .rooms {
+          grid-template-columns: 1fr;
+        }
+        .room-menu {
+          padding: 0.9rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="page" id="page">
+      <div class="orbs" aria-hidden="true">
+        <span class="orb"></span>
+        <span class="orb"></span>
+        <span class="orb"></span>
+        <span class="orb"></span>
+        <span class="orb"></span>
+      </div>
+
+      <header class="header">
+        <p class="eyebrow">Galleria interiore // corrupted</p>
+        <h1><span>Stanze dell'Io</span></h1>
+        <p class="subtitle">
+          Quattro soglie, quattro visioni, una sola discesa dentro un sistema
+          che non regge più.
+        </p>
+        <p class="phrase" id="phrase" aria-live="polite"></p>
+      </header>
+
+      <main class="stage" aria-labelledby="main-title">
+        <h2 id="main-title" class="sr-only">
+          Ingresso della galleria corrotta
+        </h2>
+
+        <div class="gallery-card" aria-hidden="true">Colore.exe</div>
+        <div class="gallery-card" aria-hidden="true">Memoria.bak</div>
+        <div class="gallery-card" aria-hidden="true">Ombra.err</div>
+        <div class="gallery-card" aria-hidden="true">Luce.tmp</div>
+
+        <section class="door-area" aria-label="Portone d'ingresso corrotto">
+          <p class="sign">Portone instabile</p>
+          <p class="instruction">Premi il portone, se risponde ancora</p>
+
+          <div class="door-wrap">
+            <div class="door-glow" aria-hidden="true"></div>
+            <div class="door-rays" aria-hidden="true"></div>
+            <div class="door-frame" aria-hidden="true"></div>
+
+            <button
+              class="door"
+              id="openDoor"
+              type="button"
+              aria-controls="roomMenu"
+              aria-expanded="false"
+              aria-label="Apri il portone corrotto e mostra le stanze"
+            >
+              <span class="symbol" aria-hidden="true">◊</span>
+              <span class="door-shine" aria-hidden="true"></span>
+            </button>
+          </div>
+        </section>
+
+        <aside class="plaque">
+          <strong>Installazione digitale corrotta</strong><br />
+          Percorso simbolico tra memoria, immaginazione, ombra e sogno. Sistema
+          instabile.
+        </aside>
+
+        <div class="floor" aria-hidden="true"></div>
+      </main>
+    </div>
+
+    <section class="room-menu" id="roomMenu" aria-hidden="true">
+      <div class="room-menu__backdrop" data-close-menu></div>
+
+      <div
+        class="panel"
+        id="panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="menuTitle"
+      >
+        <h2 id="menuTitle">Scegli una stanza</h2>
+        <p>
+          Ogni colore è una soglia diversa dell'Io. Ogni porta conduce a una
+          parte della galleria, ma la galleria è rotta: memoria, immaginazione,
+          fragilità e sogno stanno collassando.
+        </p>
+
+        <div class="rooms" id="roomsGrid"></div>
+
+        <div class="panel-actions">
+          <button class="ghost-button" id="closeMenu" type="button">
+            Torna al portone // rollback
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <audio id="doorSound" src="sound/porta.mp3" preload="auto"></audio>
+    <audio id="closeSound" src="sound/portachiusa.mp3" preload="auto"></audio>
+
+    <script>
+      "use strict";
+
+      const ROOMS = [
+        {
+          number: "Stanza I",
+          title: "Il Meridiano dei Ricordi",
+          description: "Soglia della memoria // archive damaged",
+          href: "stanza1.html",
+          theme: "memory",
+        },
+        {
+          number: "Stanza II",
+          title: "La Biblioteca nella Notte",
+          description:
+            "Una stanza scura, silenziosa e calda allo stesso tempo // render failed",
+          href: "stanza2.html",
+          theme: "imagination",
+        },
+        {
+          number: "Stanza III",
+          title: "La Rosa sotto Vetro",
+          description: "Una stanza oscura, fragile, ma vera // truth overflow",
+          href: "stanza3.html",
+          theme: "shadow",
+        },
+        {
+          number: "Stanza IV",
+          title: "Sogno",
+          description:
+            "Una dimensione sospesa tra realtà e immaginazione // dream not found",
+          href: "stanza4.html",
+          theme: "dream",
+        },
+      ];
+
+      const PHRASES = [
+        "Ogni stanza è una versione corrotta di te.",
+        "Non tutte le porte portano fuori. Alcune non compilano.",
+        "Il colore è memoria, ma il file è danneggiato.",
+        "Ciò che scegli, ti definisce. Ciò che crasha, ti rivela.",
+        "Dentro ogni stanza c'è una verità diversa. Nessuna è stabile.",
+        "Non stai entrando in un luogo, ma in un errore interno.",
+        "La luce non cancella l'ombra: la manda in overflow.",
+        "Una soglia è solo una domanda con una maniglia buggata.",
+      ];
+
+      const qs = (selector, parent = document) =>
+        parent.querySelector(selector);
+
+      const elements = {
+        root: document.documentElement,
+        body: document.body,
+        page: qs("#page"),
+        openDoor: qs("#openDoor"),
+        roomMenu: qs("#roomMenu"),
+        panel: qs("#panel"),
+        closeMenu: qs("#closeMenu"),
+        roomsGrid: qs("#roomsGrid"),
+        phrase: qs("#phrase"),
+        doorSound: qs("#doorSound"),
+        closeSound: qs("#closeSound"),
+        particles: qs("#particles"),
+      };
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      const state = {
+        menuOpen: false,
+        phraseIndex: -1,
+        isTransitioning: false,
+        pointer: {
+          targetX: 0,
+          targetY: 0,
+          currentX: 0,
+          currentY: 0,
+          raf: 0,
+        },
+      };
+
+      function corruptText(text) {
+        const chars = ["█", "▓", "▒", "░", "#", "@", "?", "0", "1", "/", "\\"];
+        return text
+          .split("")
+          .map((char) => {
+            if (char === " " || Math.random() > 0.08) return char;
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("");
+      }
+
+      function createRoomCard(room, index) {
+        const card = document.createElement("a");
+        card.className = "room";
+        card.href = room.href;
+        card.dataset.theme = room.theme;
+        card.style.setProperty("--delay", `${80 + index * 70}ms`);
+        card.setAttribute("aria-label", `${room.number}: ${room.title}`);
+
+        card.innerHTML = `
+          <span class="room__number">${room.number}</span>
+          <span class="room__title">${room.title}</span>
+          <span class="room__desc">${room.description}</span>
+        `;
+
+        card.addEventListener("mouseenter", () => {
+          const title = card.querySelector(".room__title");
+          const original = room.title;
+          title.textContent = corruptText(original);
+          window.setTimeout(() => {
+            title.textContent = original;
+          }, 260);
+        });
+
+        return card;
+      }
+
+      function renderRooms() {
+        const fragment = document.createDocumentFragment();
+        ROOMS.forEach((room, index) =>
+          fragment.append(createRoomCard(room, index)),
+        );
+        elements.roomsGrid.replaceChildren(fragment);
+      }
+
+      function playAudio(audio, options = {}) {
+        if (!audio) return;
+
+        const { volume = 0.7, playbackRate = 1 } = options;
+        audio.pause();
+        audio.currentTime = 0;
+        audio.volume = volume;
+        audio.playbackRate = playbackRate;
+        audio.play().catch(() => {});
+      }
+
+      function getNextPhraseIndex() {
+        if (PHRASES.length <= 1) return 0;
+
+        let next = state.phraseIndex;
+        while (next === state.phraseIndex) {
+          next = Math.floor(Math.random() * PHRASES.length);
+        }
+
+        return next;
+      }
+
+      function changePhrase() {
+        state.phraseIndex = getNextPhraseIndex();
+        elements.phrase.classList.add("is-changing");
+
+        window.setTimeout(() => {
+          const phrase = PHRASES[state.phraseIndex];
+          elements.phrase.textContent =
+            Math.random() > 0.55 ? corruptText(phrase) : phrase;
+          elements.phrase.classList.remove("is-changing");
+        }, 120);
+      }
+
+      function setMenuVisibility(visible) {
+        state.menuOpen = visible;
+        elements.roomMenu.classList.toggle("is-visible", visible);
+        elements.roomMenu.setAttribute("aria-hidden", String(!visible));
+        elements.openDoor.classList.toggle("is-open", visible);
+        elements.openDoor.setAttribute("aria-expanded", String(visible));
+
+        if (visible) {
+          elements.closeMenu.focus({ preventScroll: true });
+        } else {
+          elements.openDoor.focus({ preventScroll: true });
+        }
+      }
+
+      function openMenu() {
+        if (state.menuOpen || state.isTransitioning) return;
+        playAudio(elements.doorSound, {
+          volume: 0.72,
+          playbackRate: 0.72 + Math.random() * 0.38,
+        });
+        setMenuVisibility(true);
+        changePhrase();
+        glitchBurst();
+      }
+
+      function closeMenu() {
+        if (!state.menuOpen || state.isTransitioning) return;
+        playAudio(elements.closeSound, {
+          volume: 0.68,
+          playbackRate: 0.7 + Math.random() * 0.4,
+        });
+        setMenuVisibility(false);
+        glitchBurst();
+      }
+
+      function enterRoom(event) {
+        const roomLink = event.target.closest(".room");
+        if (!roomLink || state.isTransitioning) return;
+
+        event.preventDefault();
+        state.isTransitioning = true;
+
+        playAudio(elements.doorSound, { volume: 0.48, playbackRate: 0.55 });
+        elements.body.classList.add("is-entering");
+
+        window.setTimeout(() => {
+          window.location.href = roomLink.href;
+        }, 680);
+      }
+
+      function closeOnBackdrop(event) {
+        if (event.target.matches("[data-close-menu]")) closeMenu();
+      }
+
+      function handleKeyboard(event) {
+        if (event.key === "Escape") closeMenu();
+      }
+
+      function updatePointerVars() {
+        const p = state.pointer;
+        p.currentX += (p.targetX - p.currentX) * 0.18;
+        p.currentY += (p.targetY - p.currentY) * 0.18;
+
+        elements.root.style.setProperty("--mx", `${p.currentX.toFixed(2)}px`);
+        elements.root.style.setProperty("--my", `${p.currentY.toFixed(2)}px`);
+
+        if (
+          Math.abs(p.targetX - p.currentX) > 0.02 ||
+          Math.abs(p.targetY - p.currentY) > 0.02
+        ) {
+          p.raf = requestAnimationFrame(updatePointerVars);
+        } else {
+          p.raf = 0;
+        }
+      }
+
+      function handlePointerMove(event) {
+        if (prefersReducedMotion) return;
+
+        const x = (event.clientX / window.innerWidth - 0.5) * 36;
+        const y = (event.clientY / window.innerHeight - 0.5) * 36;
+
+        state.pointer.targetX = x;
+        state.pointer.targetY = y;
+
+        if (!state.pointer.raf)
+          state.pointer.raf = requestAnimationFrame(updatePointerVars);
+      }
+
+      function handlePanelSpotlight(event) {
+        const rect = elements.panel.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        elements.panel.style.setProperty("--spot-x", `${x}%`);
+        elements.panel.style.setProperty("--spot-y", `${y}%`);
+      }
+
+      function handleCardSpotlight(event) {
+        const card = event.target.closest(".room");
+        if (!card) return;
+
+        const rect = card.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty("--card-x", `${x}%`);
+        card.style.setProperty("--card-y", `${y}%`);
+      }
+
+      function glitchBurst() {
+        if (prefersReducedMotion) return;
+
+        let count = 0;
+        const burst = window.setInterval(() => {
+          elements.root.style.setProperty(
+            "--glitch-x",
+            `${Math.random() * 18 - 9}px`,
+          );
+          elements.root.style.setProperty(
+            "--glitch-y",
+            `${Math.random() * 10 - 5}px`,
+          );
+          elements.page.style.transform = `translate(${Math.random() * 12 - 6}px, ${Math.random() * 8 - 4}px)`;
+          count += 1;
+
+          if (count > 8) {
+            window.clearInterval(burst);
+            elements.page.style.transform = "";
+          }
+        }, 45);
+      }
+
+      function randomMicroCrashes() {
+        if (prefersReducedMotion) return;
+
+        window.setInterval(() => {
+          if (Math.random() < 0.45) glitchBurst();
+          if (Math.random() < 0.65) changePhrase();
+        }, 4600);
+      }
+
+      function bindEvents() {
+        elements.openDoor.addEventListener("click", openMenu);
+        elements.closeMenu.addEventListener("click", closeMenu);
+        elements.roomMenu.addEventListener("click", closeOnBackdrop);
+        elements.roomsGrid.addEventListener("click", enterRoom);
+        elements.roomsGrid.addEventListener(
+          "pointermove",
+          handleCardSpotlight,
+          { passive: true },
+        );
+        elements.panel.addEventListener("pointermove", handlePanelSpotlight, {
+          passive: true,
+        });
+        window.addEventListener("pointermove", handlePointerMove, {
+          passive: true,
+        });
+        document.addEventListener("keydown", handleKeyboard);
+      }
+
+      function setupParticles() {
+        if (prefersReducedMotion || !elements.particles) return;
+
+        const canvas = elements.particles;
+        const ctx = canvas.getContext("2d", { alpha: true });
+        const particles = [];
+        const maxParticles = Math.min(180, Math.floor(window.innerWidth / 8));
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+
+        function resize() {
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function makeParticle() {
+          const palette = [
+            "255, 0, 60",
+            "0, 255, 247",
+            "255, 210, 125",
+            "255, 255, 255",
+          ];
+          return {
+            x: Math.random() * width,
+            y: Math.random() * height,
+            w: Math.random() * 44 + 2,
+            h: Math.random() * 3 + 1,
+            vx: (Math.random() - 0.5) * 1.8,
+            vy: (Math.random() - 0.5) * 0.7,
+            life: Math.random() * 0.7 + 0.2,
+            color: palette[Math.floor(Math.random() * palette.length)],
+          };
+        }
+
+        function seed() {
+          particles.length = 0;
+          for (let i = 0; i < maxParticles; i += 1)
+            particles.push(makeParticle());
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, width, height);
+
+          for (const p of particles) {
+            p.x += p.vx + state.pointer.currentX * 0.01;
+            p.y += p.vy + state.pointer.currentY * 0.006;
+
+            if (
+              p.y < -10 ||
+              p.y > height + 10 ||
+              p.x < -80 ||
+              p.x > width + 80
+            ) {
+              Object.assign(p, makeParticle());
+            }
+
+            ctx.fillStyle = `rgba(${p.color}, ${p.life})`;
+            ctx.fillRect(
+              Math.round(p.x),
+              Math.round(p.y),
+              Math.round(p.w),
+              Math.round(p.h),
+            );
+          }
+
+          if (Math.random() < 0.12) {
+            ctx.fillStyle = `rgba(${Math.random() > 0.5 ? "255,0,60" : "0,255,247"}, 0.28)`;
+            ctx.fillRect(
+              0,
+              Math.random() * height,
+              width,
+              Math.random() * 16 + 2,
+            );
+          }
+
+          requestAnimationFrame(draw);
+        }
+
+        resize();
+        seed();
+        draw();
+
+        window.addEventListener("resize", () => {
+          resize();
+          seed();
+        });
+      }
+
+      function init() {
+        renderRooms();
+        bindEvents();
+        setupParticles();
+        changePhrase();
+        randomMicroCrashes();
+      }
+
+      init();
+    </script>
+  </body>
+</html>

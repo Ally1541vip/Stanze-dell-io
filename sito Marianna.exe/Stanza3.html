@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Rosa sotto Vetro | SHADOW_CORRUPTED</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --nero: #020304;
+        --nero-soft: #080a0c;
+        --grigio-fumo: #1a2024;
+        --blu-rosa: #0b5261;
+        --azzurro-spento: #78d7e4;
+        --bianco-freddo: #dceff1;
+        --vetro: rgba(190, 240, 255, 0.12);
+        --errore: #ff003c;
+        --ciano: #00fff7;
+        --mx: 0px;
+        --my: 0px;
+      }
+
+      html {
+        background: #000;
+        color-scheme: dark;
+      }
+
+      body {
+        min-height: 100vh;
+        overflow: hidden;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--bianco-freddo);
+        background:
+          radial-gradient(
+            circle at calc(50% + var(--mx)) calc(40% + var(--my)),
+            rgba(16, 93, 107, 0.42),
+            transparent 23%
+          ),
+          radial-gradient(
+            circle at calc(78% - var(--mx)) calc(20% + var(--my)),
+            rgba(255, 255, 255, 0.08),
+            transparent 18%
+          ),
+          radial-gradient(
+            circle at 22% 75%,
+            rgba(255, 0, 60, 0.14),
+            transparent 20%
+          ),
+          linear-gradient(
+            145deg,
+            #000 0%,
+            #050607 38%,
+            #0e1214 64%,
+            #001f26 65%,
+            #ff003c 66%,
+            #010101 100%
+          );
+        background-size: 160% 160%;
+        cursor: crosshair;
+        animation:
+          shadowBreath 8s steps(7) infinite alternate,
+          pageCrack 6.3s steps(1) infinite;
+      }
+
+      body::before,
+      body::after {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      body::before {
+        content: "";
+        z-index: 80;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.08) 0 1px,
+            transparent 1px 4px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 0, 60, 0.05) 0 2px,
+            rgba(0, 255, 247, 0.04) 2px 4px,
+            transparent 4px 9px
+          ),
+          radial-gradient(
+            circle at center,
+            transparent 38%,
+            rgba(0, 0, 0, 0.78) 100%
+          );
+        mix-blend-mode: overlay;
+        animation: scanNoise 180ms steps(2) infinite;
+      }
+
+      body::after {
+        content: "SHADOW_OVERFLOW // GLASS_PROTECTION_FAILED // ROSE_FILE_LOCKED // WOUND_RENDER_ERROR";
+        z-index: 90;
+        inset: auto 0 12px 0;
+        padding: 7px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        background: rgba(0, 0, 0, 0.82);
+        color: var(--ciano);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.34em;
+        text-shadow:
+          2px 0 var(--errore),
+          -2px 0 var(--ciano),
+          0 0 16px currentColor;
+        animation:
+          errorTicker 10s linear infinite,
+          textSlice 320ms steps(2) infinite;
+      }
+
+      @keyframes shadowBreath {
+        from {
+          background-position: 0% 20%;
+          filter: saturate(1) contrast(1.08);
+        }
+        to {
+          background-position: 100% 82%;
+          filter: saturate(1.9) contrast(1.65) hue-rotate(-18deg);
+        }
+      }
+
+      @keyframes pageCrack {
+        0%,
+        91%,
+        100% {
+          transform: translate(0, 0) skew(0deg);
+        }
+        92% {
+          transform: translate(-10px, 2px) skew(0.8deg);
+        }
+        94% {
+          transform: translate(12px, -3px) skew(-1.2deg);
+        }
+        96% {
+          transform: translate(-4px, 1px);
+        }
+      }
+
+      @keyframes scanNoise {
+        to {
+          transform: translateY(4px);
+        }
+      }
+
+      @keyframes errorTicker {
+        from {
+          text-indent: 100%;
+        }
+        to {
+          text-indent: -125%;
+        }
+      }
+
+      @keyframes textSlice {
+        0%,
+        100% {
+          clip-path: inset(0);
+        }
+        50% {
+          clip-path: inset(24% 0 17% 0);
+        }
+      }
+
+      .scene {
+        position: relative;
+        min-height: 100vh;
+        padding: 28px clamp(20px, 4vw, 76px);
+        z-index: 3;
+        isolation: isolate;
+      }
+
+      .scene::before {
+        content: "";
+        position: fixed;
+        inset: -20%;
+        z-index: -1;
+        background-image:
+          radial-gradient(
+            circle,
+            rgba(220, 239, 241, 0.48) 0 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle,
+            rgba(0, 255, 247, 0.36) 0 1px,
+            transparent 1px
+          ),
+          radial-gradient(circle, rgba(255, 0, 60, 0.35) 0 1px, transparent 1px);
+        background-size:
+          44px 44px,
+          69px 69px,
+          92px 92px;
+        opacity: 0.19;
+        animation: deadPixels 560ms steps(5) infinite;
+      }
+
+      @keyframes deadPixels {
+        to {
+          transform: translate(44px, -31px);
+        }
+      }
+
+      header {
+        position: relative;
+        z-index: 12;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .back {
+        color: var(--bianco-freddo);
+        text-decoration: none;
+        padding: 11px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(220, 239, 241, 0.22);
+        background: rgba(255, 255, 255, 0.045);
+        backdrop-filter: blur(10px) contrast(1.5);
+        box-shadow:
+          0 0 28px rgba(120, 215, 228, 0.08),
+          2px 0 rgba(255, 0, 60, 0.42),
+          -2px 0 rgba(0, 255, 247, 0.36);
+        font-family: Consolas, "Courier New", monospace;
+        text-shadow:
+          2px 0 var(--errore),
+          -2px 0 var(--ciano);
+        transition:
+          transform 0.12s steps(2),
+          background 0.12s steps(2),
+          box-shadow 0.12s steps(2);
+      }
+
+      .back:hover {
+        background: rgba(120, 215, 228, 0.12);
+        transform: translateY(-3px) skewX(-6deg);
+        box-shadow:
+          0 0 38px rgba(120, 215, 228, 0.22),
+          0 0 30px rgba(255, 0, 60, 0.26);
+      }
+
+      .room-number {
+        font-size: 0.8rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: rgba(220, 239, 241, 0.62);
+        font-family: Consolas, "Courier New", monospace;
+        text-shadow:
+          2px 0 var(--errore),
+          -2px 0 var(--ciano);
+        animation: labelBug 1.2s steps(2) infinite;
+      }
+
+      @keyframes labelBug {
+        0%,
+        100% {
+          transform: translate(0);
+        }
+        48% {
+          transform: translate(-3px, 1px);
+        }
+        52% {
+          transform: translate(5px, -1px);
+        }
+      }
+
+      main {
+        position: relative;
+        min-height: calc(100vh - 70px);
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: clamp(30px, 5vw, 80px);
+        align-items: center;
+      }
+
+      .image-zone {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 760px;
+        z-index: 5;
+      }
+
+      .glass-aura {
+        position: absolute;
+        width: min(760px, 92vw);
+        height: min(760px, 92vw);
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, rgba(120, 215, 228, 0.16), transparent 58%),
+          conic-gradient(
+            from 180deg,
+            transparent,
+            rgba(255, 0, 60, 0.28),
+            transparent,
+            rgba(220, 239, 241, 0.28),
+            transparent,
+            rgba(11, 82, 97, 0.45),
+            transparent,
+            rgba(0, 255, 247, 0.24),
+            transparent
+          );
+        filter: blur(3px) contrast(1.8);
+        animation:
+          rotateAura 4.2s steps(12) infinite,
+          auraCrack 900ms steps(2) infinite;
+        opacity: 0.78;
+      }
+
+      @keyframes rotateAura {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes auraCrack {
+        0%,
+        100% {
+          clip-path: inset(0);
+        }
+        50% {
+          clip-path: inset(8% 0 5% 0);
+        }
+      }
+
+      .art-frame {
+        position: relative;
+        width: min(560px, 84vw);
+        padding: 14px;
+        border-radius: 18px;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.07) 0 2px,
+            transparent 2px 7px
+          ),
+          linear-gradient(
+            145deg,
+            rgba(220, 239, 241, 0.18),
+            rgba(255, 0, 60, 0.09),
+            rgba(0, 255, 247, 0.08),
+            rgba(0, 0, 0, 0.45)
+          ),
+          rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(220, 239, 241, 0.24);
+        box-shadow:
+          0 36px 120px rgba(0, 0, 0, 0.94),
+          0 0 90px rgba(120, 215, 228, 0.26),
+          0 0 80px rgba(255, 0, 60, 0.18),
+          4px 0 rgba(255, 0, 60, 0.38),
+          -4px 0 rgba(0, 255, 247, 0.34),
+          inset 0 0 42px rgba(255, 255, 255, 0.08);
+        transform: rotate(-2.4deg);
+        transition:
+          transform 0.12s steps(2),
+          box-shadow 0.12s steps(2),
+          filter 0.12s steps(2);
+        overflow: hidden;
+        animation: frameBreak 1.1s steps(3) infinite;
+      }
+
+      .art-frame:hover {
+        transform: rotate(0deg) scale(1.028) translateY(-8px) skewX(-1deg);
+        filter: contrast(1.45) saturate(1.7);
+        box-shadow:
+          0 46px 140px rgba(0, 0, 0, 0.98),
+          0 0 130px rgba(120, 215, 228, 0.36),
+          0 0 95px rgba(255, 0, 60, 0.28),
+          inset 0 0 42px rgba(255, 255, 255, 0.1);
+      }
+
+      .art-frame::before,
+      .art-frame::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border-radius: 26px;
+        pointer-events: none;
+        z-index: 3;
+        mix-blend-mode: screen;
+      }
+
+      .art-frame::before {
+        background:
+          linear-gradient(
+            115deg,
+            transparent 35%,
+            rgba(255, 255, 255, 0.25) 48%,
+            transparent 62%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(255, 0, 60, 0.22),
+            transparent 38%,
+            rgba(0, 255, 247, 0.2)
+          );
+        transform: translateX(-8px);
+        animation: glassSplitA 620ms steps(2) infinite;
+      }
+
+      .art-frame::after {
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.12) 0 1px,
+            transparent 1px 5px
+          ),
+          linear-gradient(
+            45deg,
+            transparent 0 48%,
+            rgba(255, 255, 255, 0.35) 49% 50%,
+            transparent 51% 100%
+          );
+        animation: glassSplitB 460ms steps(2) infinite;
+      }
+
+      @keyframes frameBreak {
+        0%,
+        100% {
+          clip-path: inset(0);
+        }
+        46% {
+          clip-path: inset(0 0 9% 0);
+        }
+        50% {
+          clip-path: inset(8% 0 0 0);
+        }
+      }
+
+      @keyframes glassSplitA {
+        0%,
+        100% {
+          transform: translateX(-8px);
+          opacity: 0.64;
+        }
+        50% {
+          transform: translateX(10px);
+          opacity: 0.22;
+        }
+      }
+
+      @keyframes glassSplitB {
+        to {
+          transform: translateY(5px);
+        }
+      }
+
+      .art-frame img {
+        position: relative;
+        width: 100%;
+        height: 720px;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 12px;
+        filter: contrast(1.18) saturate(1.25) brightness(0.88) hue-rotate(-8deg);
+        z-index: 1;
+        animation: imageDamage 1s steps(3) infinite;
+      }
+
+      @keyframes imageDamage {
+        0%,
+        100% {
+          transform: translate(0, 0);
+          filter: contrast(1.18) saturate(1.25) brightness(0.88)
+            hue-rotate(-8deg);
+        }
+        47% {
+          transform: translate(-3px, 1px);
+          filter: contrast(1.55) saturate(2) brightness(0.92) hue-rotate(34deg);
+        }
+        51% {
+          transform: translate(4px, -2px);
+          filter: invert(0.07) saturate(2.3) contrast(1.65);
+        }
+      }
+
+      .label {
+        position: absolute;
+        left: 22px;
+        bottom: 22px;
+        z-index: 4;
+        padding: 12px 16px;
+        border-radius: 8px;
+        color: rgba(220, 239, 241, 0.92);
+        background: rgba(0, 0, 0, 0.68);
+        border: 1px solid rgba(220, 239, 241, 0.22);
+        backdrop-filter: blur(10px) contrast(1.5);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.88rem;
+        line-height: 1.35;
+        box-shadow:
+          2px 0 rgba(255, 0, 60, 0.45),
+          -2px 0 rgba(0, 255, 247, 0.42);
+        animation: labelDamage 820ms steps(2) infinite;
+      }
+
+      @keyframes labelDamage {
+        0%,
+        100% {
+          transform: translate(0);
+        }
+        50% {
+          transform: translate(3px, -1px);
+        }
+      }
+
+      .text-zone {
+        position: relative;
+        z-index: 7;
+        padding: clamp(26px, 4vw, 48px);
+        border-radius: 20px;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.04) 0 2px,
+            transparent 2px 7px
+          ),
+          linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.08),
+            rgba(11, 82, 97, 0.08),
+            rgba(255, 0, 60, 0.045)
+          ),
+          rgba(0, 0, 0, 0.62);
+        border: 1px solid rgba(220, 239, 241, 0.18);
+        backdrop-filter: blur(16px) contrast(1.5) saturate(1.5);
+        box-shadow:
+          0 30px 100px rgba(0, 0, 0, 0.78),
+          4px 0 rgba(255, 0, 60, 0.34),
+          -4px 0 rgba(0, 255, 247, 0.32),
+          inset 0 0 46px rgba(255, 255, 255, 0.04);
+        overflow: hidden;
+        animation: boxCrash 1.35s steps(2) infinite;
+      }
+
+      .text-zone::before {
+        content: "";
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        right: -70px;
+        top: -80px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 0, 60, 0.18),
+          transparent 68%
+        );
+        filter: blur(8px);
+      }
+
+      .text-zone::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px dashed rgba(220, 239, 241, 0.18);
+        border-radius: 14px;
+        pointer-events: none;
+      }
+
+      @keyframes boxCrash {
+        0%,
+        100% {
+          clip-path: inset(0);
+        }
+        49% {
+          clip-path: inset(0 0 4% 0);
+        }
+        52% {
+          clip-path: inset(5% 0 0 0);
+        }
+      }
+
+      .tag {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 18px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(120, 215, 228, 0.1);
+        border: 1px solid rgba(220, 239, 241, 0.18);
+        color: rgba(220, 239, 241, 0.78);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.74rem;
+        z-index: 1;
+        text-shadow:
+          2px 0 var(--errore),
+          -2px 0 var(--ciano);
+      }
+
+      h1 {
+        position: relative;
+        z-index: 1;
+        font-size: clamp(3rem, 7vw, 6.6rem);
+        line-height: 0.9;
+        margin-bottom: 24px;
+        letter-spacing: -2px;
+        text-shadow:
+          5px 0 rgba(255, 0, 60, 0.75),
+          -5px 0 rgba(0, 255, 247, 0.68),
+          0 0 18px rgba(120, 215, 228, 0.34),
+          0 18px 40px rgba(0, 0, 0, 0.9);
+        animation: titleBroken 1.45s steps(2) infinite;
+      }
+
+      h1::before,
+      h1::after {
+        content: "La Rosa\A sotto Vetro";
+        white-space: pre;
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
+      h1::before {
+        color: var(--errore);
+        transform: translate(-8px, 2px);
+        clip-path: inset(0 0 54% 0);
+      }
+
+      h1::after {
+        color: var(--ciano);
+        transform: translate(8px, -2px);
+        clip-path: inset(48% 0 0 0);
+      }
+
+      @keyframes titleBroken {
+        0%,
+        100% {
+          transform: translate(0);
+        }
+        89% {
+          transform: translate(0);
+        }
+        91% {
+          transform: translate(-7px, 2px) skewX(4deg);
+        }
+        93% {
+          transform: translate(9px, -2px) skewX(-5deg);
+        }
+      }
+
+      .intro {
+        position: relative;
+        z-index: 1;
+        color: rgba(220, 239, 241, 0.76);
+        font-size: clamp(1rem, 1.45vw, 1.18rem);
+        line-height: 1.75;
+        margin-bottom: 26px;
+        text-shadow:
+          1px 0 rgba(255, 0, 60, 0.48),
+          -1px 0 rgba(0, 255, 247, 0.4);
+      }
+
+      .description {
+        position: relative;
+        z-index: 1;
+        padding: 22px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.045);
+        border: 1px dashed rgba(220, 239, 241, 0.26);
+        box-shadow:
+          inset 0 0 34px rgba(120, 215, 228, 0.06),
+          0 0 24px rgba(255, 0, 60, 0.08);
+        font-family: Consolas, "Courier New", monospace;
+      }
+
+      .description h2 {
+        font-size: 1.28rem;
+        margin-bottom: 12px;
+        color: rgba(158, 236, 247, 0.88);
+        text-shadow:
+          2px 0 var(--errore),
+          -2px 0 var(--ciano);
+      }
+
+      .description p {
+        color: rgba(220, 239, 241, 0.72);
+        line-height: 1.7;
+      }
+
+      .keywords {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .keywords span {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.055);
+        border: 1px solid rgba(220, 239, 241, 0.14);
+        color: rgba(220, 239, 241, 0.66);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.85rem;
+        box-shadow:
+          2px 0 rgba(255, 0, 60, 0.25),
+          -2px 0 rgba(0, 255, 247, 0.22);
+        animation: keywordBug 1.8s steps(2) infinite;
+      }
+
+      .keywords span:nth-child(2n) {
+        animation-delay: 0.4s;
+      }
+      .keywords span:nth-child(3n) {
+        animation-delay: 0.8s;
+      }
+
+      @keyframes keywordBug {
+        0%,
+        100% {
+          opacity: 0.66;
+          transform: translate(0);
+        }
+        50% {
+          opacity: 1;
+          transform: translate(2px, -1px);
+        }
+      }
+
+      .barbed-wire {
+        position: fixed;
+        left: -10vw;
+        width: 120vw;
+        height: 2px;
+        background: rgba(220, 239, 241, 0.12);
+        box-shadow:
+          2px 0 rgba(255, 0, 60, 0.45),
+          -2px 0 rgba(0, 255, 247, 0.38),
+          0 0 22px rgba(120, 215, 228, 0.18);
+        transform: rotate(-8deg);
+        z-index: 2;
+        pointer-events: none;
+        animation: wireGlitch 1.1s steps(2) infinite;
+      }
+
+      .wire-1 {
+        top: 24%;
+      }
+      .wire-2 {
+        top: 70%;
+        transform: rotate(7deg);
+        opacity: 0.55;
+      }
+
+      .barbed-wire::before,
+      .barbed-wire::after {
+        content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧";
+        position: absolute;
+        left: 0;
+        top: -13px;
+        width: 100%;
+        letter-spacing: 70px;
+        color: rgba(220, 239, 241, 0.14);
+        font-size: 18px;
+        text-shadow:
+          2px 0 rgba(255, 0, 60, 0.42),
+          -2px 0 rgba(0, 255, 247, 0.38),
+          0 0 12px rgba(120, 215, 228, 0.18);
+        animation: wireMove 4s steps(12) infinite;
+      }
+
+      .barbed-wire::after {
+        left: 60px;
+        animation-direction: reverse;
+        opacity: 0.6;
+      }
+
+      @keyframes wireMove {
+        to {
+          transform: translateX(-160px);
+        }
+      }
+
+      @keyframes wireGlitch {
+        0%,
+        100% {
+          filter: none;
+        }
+        50% {
+          filter: invert(0.25) contrast(1.8);
+        }
+      }
+
+      .smoke {
+        position: fixed;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(220, 239, 241, 0.13),
+          rgba(255, 0, 60, 0.04),
+          transparent 65%
+        );
+        filter: blur(28px) contrast(1.4);
+        pointer-events: none;
+        z-index: 2;
+        animation: smokeDrift 2.8s steps(6) infinite alternate;
+      }
+
+      .smoke-1 {
+        left: 6%;
+        top: 18%;
+      }
+      .smoke-2 {
+        right: 8%;
+        bottom: 10%;
+        animation-delay: 0.7s;
+      }
+      .smoke-3 {
+        left: 46%;
+        bottom: -70px;
+        animation-delay: 1.2s;
+      }
+
+      @keyframes smokeDrift {
+        from {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.22;
+        }
+        to {
+          transform: translate(60px, -40px) scale(1.22);
+          opacity: 0.52;
+        }
+      }
+
+      .particle {
+        position: fixed;
+        border-radius: 1px;
+        background: rgba(158, 236, 247, 0.78);
+        box-shadow:
+          0 0 14px rgba(120, 215, 228, 0.85),
+          3px 0 var(--errore),
+          -3px 0 var(--ciano);
+        pointer-events: none;
+        z-index: 4;
+        animation: rise linear forwards;
+      }
+
+      @keyframes rise {
+        from {
+          transform: translateY(0) scale(0.5) skewX(0deg);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        55% {
+          transform: translateY(-60vh) scale(1.1) skewX(28deg);
+        }
+        to {
+          transform: translateY(-120vh) scale(1.4) skewX(-18deg);
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 1050px) {
+        body {
+          overflow: auto;
+        }
+        main {
+          grid-template-columns: 1fr;
+          padding-top: 36px;
+          padding-bottom: 60px;
+        }
+        .image-zone {
+          min-height: auto;
+        }
+        .art-frame img {
+          height: auto;
+          max-height: 78vh;
+        }
+        .text-zone {
+          max-width: 760px;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .scene {
+          padding: 18px;
+        }
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        h1 {
+          font-size: 3.2rem;
+        }
+        .barbed-wire,
+        .smoke {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="barbed-wire wire-1"></div>
+    <div class="barbed-wire wire-2"></div>
+
+    <div class="smoke smoke-1"></div>
+    <div class="smoke smoke-2"></div>
+    <div class="smoke smoke-3"></div>
+
+    <section class="scene">
+      <header>
+        <a class="back" href="index.html">← rollback al portone</a>
+        <p class="room-number">Stanza III · Nera · GLASS_LOCK_FAILED</p>
+      </header>
+
+      <main>
+        <section
+          class="image-zone"
+          aria-label="Opera corrotta della stanza nera"
+        >
+          <div class="glass-aura"></div>
+
+          <figure class="art-frame">
+            <img
+              src="imgs/nero.jpg"
+              alt="Rosa scura sotto una campana di vetro avvolta dal filo spinato"
+            />
+            <figcaption class="label">
+              <strong>Opera guida</strong><br />
+              fiore, vetro, limite // protection unstable
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="text-zone">
+          <span class="tag">soglia dell'ombra // corrupted</span>
+
+          <h1>La Rosa<br />sotto Vetro</h1>
+
+          <p class="intro" id="intro">
+            Una stanza oscura e fragile, dove ciò che è bello non scompare:
+            viene protetto, isolato, quasi imprigionato. Il nero non è solo
+            assenza di luce, ma spazio in cui una ferita diventa simbolo.
+          </p>
+
+          <div class="description">
+            <h2>Descrizione dell'opera</h2>
+            <p id="descriptionText">
+              Inserisci qui la descrizione definitiva. Puoi parlare della rosa
+              come parte delicata dell'Io, del vetro come protezione e distanza,
+              del filo spinato come limite, paura o difesa, e del fumo come
+              memoria che non riesce del tutto a svanire. Il vetro, però, non
+              protegge più bene: vibra, si incrina, riflette errori.
+            </p>
+          </div>
+
+          <div class="keywords">
+            <span>ombra.err</span>
+            <span>protezione.lock</span>
+            <span>ferita.bak</span>
+            <span>silenzio.tmp</span>
+            <span>resistenza.exe</span>
+          </div>
+        </section>
+      </main>
+    </section>
+
+    <script>
+      "use strict";
+
+      const root = document.documentElement;
+      const frame = document.querySelector(".art-frame");
+      const aura = document.querySelector(".glass-aura");
+      const smoke = document.querySelectorAll(".smoke");
+      const intro = document.querySelector("#intro");
+      const descriptionText = document.querySelector("#descriptionText");
+
+      const introOriginal = intro.textContent.trim();
+      const descriptionOriginal = descriptionText.textContent.trim();
+      const glitchChars = [
+        "█",
+        "▓",
+        "▒",
+        "░",
+        "0",
+        "1",
+        "?",
+        "#",
+        "@",
+        "/",
+        "\\",
+        "_",
+      ];
+
+      function corruptText(text, intensity = 0.06) {
+        return text
+          .split("")
+          .map((char) => {
+            if (char === " " || char === "\n" || Math.random() > intensity)
+              return char;
+            return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+          })
+          .join("");
+      }
+
+      document.addEventListener("mousemove", (event) => {
+        const x = event.clientX / window.innerWidth - 0.5;
+        const y = event.clientY / window.innerHeight - 0.5;
+        const randomError = Math.random() > 0.91 ? Math.random() * 12 - 6 : 0;
+
+        root.style.setProperty("--mx", `${x * 32}px`);
+        root.style.setProperty("--my", `${y * 32}px`);
+
+        frame.style.transform = `rotate(${x * 5 - 2.4 + randomError}deg) translate(${x * 14 + randomError}px, ${y * 14 - randomError}px)`;
+        aura.style.transform = `translate(${x * 34 - randomError}px, ${y * 34 + randomError}px) rotate(${x * 28}deg)`;
+
+        smoke.forEach((s, i) => {
+          const force = (i + 1) * 22;
+          s.style.transform = `translate(${x * force + randomError}px, ${y * force - randomError}px)`;
+        });
+      });
+
+      function createParticle() {
+        const p = document.createElement("span");
+        p.classList.add("particle");
+
+        const colors = [
+          "158, 236, 247",
+          "0, 255, 247",
+          "255, 0, 60",
+          "220, 239, 241",
+        ];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.bottom = "-20px";
+        p.style.animationDuration = 3 + Math.random() * 7 + "s";
+        p.style.opacity = 0.25 + Math.random() * 0.65;
+        p.style.width = 2 + Math.random() * 34 + "px";
+        p.style.height = 2 + Math.random() * 8 + "px";
+        p.style.background = `rgba(${color}, 0.86)`;
+        document.body.appendChild(p);
+
+        setTimeout(() => p.remove(), 11000);
+      }
+
+      function crashText() {
+        if (Math.random() > 0.5) {
+          intro.textContent = corruptText(
+            introOriginal,
+            0.06 + Math.random() * 0.08,
+          );
+          setTimeout(
+            () => {
+              intro.textContent = introOriginal;
+            },
+            160 + Math.random() * 220,
+          );
+        } else {
+          descriptionText.textContent = corruptText(
+            descriptionOriginal,
+            0.07 + Math.random() * 0.09,
+          );
+          setTimeout(
+            () => {
+              descriptionText.textContent = descriptionOriginal;
+            },
+            180 + Math.random() * 240,
+          );
+        }
+      }
+
+      function microCrash() {
+        document.body.style.filter =
+          Math.random() > 0.5
+            ? "hue-rotate(55deg) contrast(1.45)"
+            : "invert(0.08) saturate(2.2)";
+        setTimeout(() => {
+          document.body.style.filter = "";
+        }, 90);
+      }
+
+      setInterval(createParticle, 130);
+      setInterval(crashText, 2300);
+      setInterval(() => {
+        if (Math.random() > 0.42) microCrash();
+      }, 1600);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sogno | HEAVEN_OVERWRITE</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg1: #ffffff;
+        --bg2: #fdf6e3;
+        --gold: #ffe28a;
+        --cyan: #7ef9ff;
+        --error: #ff5ea8;
+        --text: #fffef9;
+        --shadow: rgba(255, 255, 255, 0.7);
+        --mx: 0px;
+        --my: 0px;
+      }
+
+      html {
+        background: #fff;
+        overflow: hidden;
+      }
+
+      body {
+        min-height: 100vh;
+        overflow: hidden;
+        font-family: Georgia, serif;
+        background:
+          radial-gradient(
+            circle at calc(50% + var(--mx)) calc(30% + var(--my)),
+            rgba(255, 255, 255, 0.95),
+            transparent 24%
+          ),
+          radial-gradient(
+            circle at 70% 20%,
+            rgba(126, 249, 255, 0.25),
+            transparent 18%
+          ),
+          radial-gradient(
+            circle at 20% 80%,
+            rgba(255, 94, 168, 0.14),
+            transparent 20%
+          ),
+          linear-gradient(to top, #fdf6e3, #ffffff, #ffffff);
+        color: #3a2b1a;
+        cursor: crosshair;
+        animation:
+          heavenPulse 8s ease-in-out infinite alternate,
+          holyError 7s steps(2) infinite;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      body::before {
+        z-index: 90;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.08) 0 2px,
+            transparent 2px 5px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 0 1px,
+            transparent 1px 4px
+          );
+        mix-blend-mode: overlay;
+        opacity: 0.5;
+        animation: scanline 180ms steps(2) infinite;
+      }
+
+      body::after {
+        content: "HEAVEN_OVERWRITE // DREAM_SIGNAL_LOST // PARADISE_RENDERING // LIGHT_OVERFLOW";
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 8px 0;
+        background: rgba(255, 255, 255, 0.78);
+        color: #b38b2d;
+        font-family: Consolas, monospace;
+        letter-spacing: 0.35em;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        text-shadow:
+          2px 0 var(--error),
+          -2px 0 var(--cyan),
+          0 0 12px rgba(255, 255, 255, 0.9);
+        animation: ticker 12s linear infinite;
+        z-index: 120;
+      }
+
+      @keyframes ticker {
+        from {
+          text-indent: 100%;
+        }
+        to {
+          text-indent: -120%;
+        }
+      }
+
+      @keyframes scanline {
+        to {
+          transform: translateY(5px);
+        }
+      }
+
+      @keyframes heavenPulse {
+        from {
+          filter: brightness(1) saturate(1);
+          background-position: 0% 0%;
+        }
+        to {
+          filter: brightness(1.18) saturate(1.25);
+          background-position: 100% 100%;
+        }
+      }
+
+      @keyframes holyError {
+        0%,
+        100% {
+          transform: translate(0);
+        }
+        92% {
+          transform: translate(-4px, 2px);
+        }
+        95% {
+          transform: translate(5px, -2px);
+        }
+      }
+
+      .cloud {
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        filter: blur(10px);
+        opacity: 0.85;
+        box-shadow:
+          0 0 60px rgba(255, 255, 255, 0.9),
+          0 0 120px rgba(126, 249, 255, 0.25);
+      }
+
+      .cloud::before,
+      .cloud::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .cloud::before {
+        width: 60%;
+        height: 70%;
+        left: 10%;
+        top: -25%;
+      }
+
+      .cloud::after {
+        width: 45%;
+        height: 55%;
+        right: 8%;
+        top: -15%;
+      }
+
+      .cloud1 {
+        width: 260px;
+        height: 120px;
+        top: 18%;
+        left: -10%;
+        animation: moveCloud 18s linear infinite;
+      }
+
+      .cloud2 {
+        width: 340px;
+        height: 150px;
+        top: 48%;
+        left: -20%;
+        animation: moveCloud 28s linear infinite;
+      }
+
+      .cloud3 {
+        width: 220px;
+        height: 100px;
+        top: 70%;
+        left: -15%;
+        animation: moveCloud 22s linear infinite;
+      }
+
+      @keyframes moveCloud {
+        from {
+          transform: translateX(0) skewX(0deg);
+        }
+        48% {
+          transform: translateX(52vw) skewX(2deg);
+        }
+        50% {
+          transform: translateX(54vw) skewX(-8deg) scale(1.03);
+          filter: blur(14px) brightness(1.3);
+        }
+        to {
+          transform: translateX(120vw);
+        }
+      }
+
+      .column {
+        position: absolute;
+        bottom: -5%;
+        width: 110px;
+        height: 75vh;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.95) 0 10px,
+            rgba(240, 230, 210, 0.95) 10px 20px
+          ),
+          linear-gradient(#ffffff, #eee8da);
+        border-radius: 30px;
+        opacity: 0.5;
+        filter: blur(1px);
+        box-shadow:
+          0 0 60px rgba(255, 255, 255, 0.9),
+          inset 0 0 40px rgba(255, 255, 255, 0.8);
+        animation: pillarError 3s steps(2) infinite;
+      }
+
+      .column.left {
+        left: 4%;
+      }
+      .column.right {
+        right: 4%;
+      }
+
+      @keyframes pillarError {
+        0%,
+        100% {
+          transform: skewX(0deg);
+        }
+        50% {
+          transform: skewX(-1deg) translateY(-4px);
+        }
+      }
+
+      .light {
+        position: absolute;
+        top: -10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 420px;
+        height: 120vh;
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.2),
+            transparent
+          ),
+          linear-gradient(
+            90deg,
+            rgba(126, 249, 255, 0.12),
+            transparent,
+            rgba(255, 94, 168, 0.1)
+          );
+        opacity: 0.75;
+        filter: blur(18px);
+        mix-blend-mode: screen;
+        animation: holyBeam 6s ease-in-out infinite alternate;
+      }
+
+      @keyframes holyBeam {
+        from {
+          transform: translateX(-50%) scaleX(1);
+          opacity: 0.6;
+        }
+        to {
+          transform: translateX(-50%) scaleX(1.18);
+          opacity: 0.95;
+        }
+      }
+
+      header {
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        z-index: 20;
+      }
+
+      header a {
+        text-decoration: none;
+        color: #6b4a1f;
+        background: rgba(255, 255, 255, 0.72);
+        padding: 12px 18px;
+        border-radius: 999px;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        font-family: Consolas, monospace;
+        text-shadow:
+          1px 0 var(--error),
+          -1px 0 var(--cyan);
+        box-shadow:
+          0 0 40px rgba(255, 255, 255, 0.8),
+          0 0 18px rgba(126, 249, 255, 0.18);
+        transition: 0.15s steps(2);
+      }
+
+      header a:hover {
+        transform: translateY(-3px) skewX(-4deg);
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      main {
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: space-around;
+        gap: 60px;
+        padding: 40px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .img-box {
+        position: relative;
+        z-index: 2;
+        flex: 1.3;
+        animation: imageFloat 6s ease-in-out infinite alternate;
+      }
+
+      @keyframes imageFloat {
+        from {
+          transform: translateY(0px);
+        }
+        to {
+          transform: translateY(-18px);
+        }
+      }
+
+      .img-box::before {
+        content: "";
+        position: absolute;
+        inset: -40px;
+        border-radius: 40px;
+        background:
+          radial-gradient(circle, rgba(255, 255, 255, 0.55), transparent 65%),
+          conic-gradient(
+            from 90deg,
+            transparent,
+            rgba(126, 249, 255, 0.22),
+            transparent,
+            rgba(255, 94, 168, 0.18),
+            transparent
+          );
+        filter: blur(8px);
+        animation: auraRotate 10s linear infinite;
+      }
+
+      @keyframes auraRotate {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .img-box img {
+        position: relative;
+        width: 700px;
+        max-width: 90vw;
+        border-radius: 28px;
+        box-shadow:
+          0 0 120px rgba(255, 220, 150, 0.9),
+          0 0 200px rgba(255, 255, 255, 0.6),
+          0 0 260px rgba(126, 249, 255, 0.22);
+        z-index: 2;
+        animation: dreamGlitch 1.8s steps(2) infinite;
+      }
+
+      @keyframes dreamGlitch {
+        0%,
+        100% {
+          transform: translate(0);
+          filter: brightness(1) contrast(1.05);
+        }
+        48% {
+          transform: translate(-4px, 2px);
+          filter: brightness(1.18) contrast(1.2) hue-rotate(12deg);
+        }
+        52% {
+          transform: translate(6px, -2px);
+          filter: brightness(1.3) saturate(1.4);
+        }
+      }
+
+      .img-box img::before {
+        content: "";
+      }
+
+      .text-box {
+        position: absolute;
+        right: 8%;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 440px;
+        background: rgba(255, 255, 255, 0.74);
+        padding: 34px;
+        border-radius: 24px;
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow:
+          0 20px 60px rgba(255, 255, 255, 0.45),
+          0 0 100px rgba(255, 255, 255, 0.8),
+          inset 0 0 30px rgba(255, 255, 255, 0.8);
+        z-index: 3;
+        overflow: hidden;
+        animation: panelError 3s steps(2) infinite;
+      }
+
+      .text-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          115deg,
+          transparent 40%,
+          rgba(255, 255, 255, 0.6) 50%,
+          transparent 60%
+        );
+        transform: translateX(-120%);
+        animation: glassSweep 5s ease-in-out infinite;
+      }
+
+      @keyframes glassSweep {
+        to {
+          transform: translateX(120%);
+        }
+      }
+
+      @keyframes panelError {
+        0%,
+        100% {
+          clip-path: inset(0);
+        }
+        48% {
+          clip-path: inset(0 0 6% 0);
+        }
+        52% {
+          clip-path: inset(5% 0 0 0);
+        }
+      }
+
+      h1 {
+        font-size: 72px;
+        line-height: 0.9;
+        color: #d4af37;
+        text-shadow:
+          4px 0 var(--error),
+          -4px 0 var(--cyan),
+          0 0 22px rgba(255, 255, 255, 0.9);
+        position: relative;
+        animation: titleBreak 2s steps(2) infinite;
+      }
+
+      h1::before,
+      h1::after {
+        content: "Sogno";
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0.5;
+      }
+
+      h1::before {
+        transform: translate(-6px, 1px);
+        color: var(--error);
+        clip-path: inset(0 0 50% 0);
+      }
+
+      h1::after {
+        transform: translate(6px, -1px);
+        color: var(--cyan);
+        clip-path: inset(50% 0 0 0);
+      }
+
+      @keyframes titleBreak {
+        0%,
+        100% {
+          transform: translate(0);
+        }
+        50% {
+          transform: translate(3px, -1px);
+        }
+      }
+
+      p {
+        margin-top: 20px;
+        line-height: 1.7;
+        color: #5a4b39;
+        text-shadow:
+          1px 0 rgba(255, 94, 168, 0.3),
+          -1px 0 rgba(126, 249, 255, 0.3);
+      }
+
+      .desc {
+        margin-top: 24px;
+        padding: 22px;
+        border: 2px dashed #e0c48a;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.35);
+        font-family: Consolas, monospace;
+        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
+      }
+
+      .star {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow:
+          0 0 14px gold,
+          0 0 30px rgba(255, 255, 255, 0.95);
+        animation: twinkle 1.8s infinite alternate;
+      }
+
+      @keyframes twinkle {
+        from {
+          opacity: 0.3;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+
+      .particle {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 100;
+        animation: float linear infinite;
+      }
+
+      @keyframes float {
+        from {
+          transform: translateY(100vh) scale(0.5);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        60% {
+          transform: translateY(20vh) scale(1.3);
+        }
+        to {
+          transform: translateY(-20vh) scale(0.7);
+          opacity: 0;
+        }
+      }
+
+      .angel-code {
+        position: fixed;
+        top: -10%;
+        color: rgba(212, 175, 55, 0.22);
+        font-family: Consolas, monospace;
+        font-size: 0.9rem;
+        writing-mode: vertical-rl;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+        pointer-events: none;
+        z-index: 5;
+        animation: codeRain linear infinite;
+      }
+
+      @keyframes codeRain {
+        to {
+          transform: translateY(130vh);
+        }
+      }
+
+      @media (max-width: 1000px) {
+        body {
+          overflow: auto;
+        }
+
+        main {
+          flex-direction: column;
+          justify-content: center;
+          padding-top: 120px;
+          padding-bottom: 80px;
+        }
+
+        .text-box {
+          position: relative;
+          right: auto;
+          top: auto;
+          transform: none;
+          width: 100%;
+          max-width: 720px;
+        }
+
+        .img-box img {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 560px) {
+        h1 {
+          font-size: 54px;
+        }
+
+        .column {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="light"></div>
+
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <div class="column left"></div>
+    <div class="column right"></div>
+
+    <header>
+      <a href="index.html">← return_to_heaven()</a>
+    </header>
+
+    <main>
+      <div class="img-box">
+        <img src="imgs/bianco.jpg" alt="Sogno" />
+
+        <div class="star" style="top: 10%; left: 20%"></div>
+        <div class="star" style="top: 30%; left: 80%"></div>
+      </div>
+
+      <div class="text-box">
+        <h1>Sogno</h1>
+
+        <p id="introText">
+          Una dimensione pura e sospesa, dove la realtà si dissolve e resta solo
+          luce.
+        </p>
+
+        <div class="desc">
+          <strong>Descrizione:</strong><br />
+          <span id="descText">Inserisci qui la descrizione dell'opera.</span>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      "use strict";
+
+      const root = document.documentElement;
+      const intro = document.querySelector("#introText");
+      const desc = document.querySelector("#descText");
+      const img = document.querySelector(".img-box img");
+      const light = document.querySelector(".light");
+
+      const introOriginal = intro.textContent;
+      const descOriginal = desc.textContent;
+
+      const chars = ["░", "▒", "▓", "█", "0", "1", "✧", "✦", "∞", "//"];
+
+      function corrupt(text, intensity = 0.06) {
+        return text
+          .split("")
+          .map((c) => {
+            if (c === " " || Math.random() > intensity) return c;
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("");
+      }
+
+      document.addEventListener("mousemove", (e) => {
+        const x = e.clientX / window.innerWidth - 0.5;
+        const y = e.clientY / window.innerHeight - 0.5;
+
+        root.style.setProperty("--mx", `${x * 40}px`);
+        root.style.setProperty("--my", `${y * 40}px`);
+
+        img.style.transform = `translate(${x * 12}px, ${y * 12}px) rotate(${x * 2}deg)`;
+        light.style.transform = `translateX(calc(-50% + ${x * 40}px)) scaleX(${1 + Math.abs(x) * 0.2})`;
+      });
+
+      function createParticle() {
+        const p = document.createElement("div");
+        p.classList.add("particle");
+
+        const size = 3 + Math.random() * 10;
+        const colors = [
+          "rgba(255,255,255,0.9)",
+          "rgba(255,226,138,0.8)",
+          "rgba(126,249,255,0.8)",
+          "rgba(255,94,168,0.55)",
+        ];
+
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.boxShadow = `0 0 ${10 + Math.random() * 25}px currentColor`;
+        p.style.animationDuration = 4 + Math.random() * 7 + "s";
+
+        document.body.appendChild(p);
+
+        setTimeout(() => p.remove(), 12000);
+      }
+
+      function createAngelCode() {
+        const code = document.createElement("div");
+        code.classList.add("angel-code");
+
+        const strings = [
+          "DIVINITY",
+          "LIGHT",
+          "DREAM",
+          "HEAVEN",
+          "∞∞∞",
+          "001101",
+          "WAKE_UP",
+          "ASCENSION",
+        ];
+
+        code.textContent = strings[Math.floor(Math.random() * strings.length)];
+        code.style.left = Math.random() * 100 + "vw";
+        code.style.animationDuration = 8 + Math.random() * 12 + "s";
+        code.style.opacity = 0.15 + Math.random() * 0.4;
+
+        document.body.appendChild(code);
+
+        setTimeout(() => code.remove(), 20000);
+      }
+
+      function textGlitch() {
+        if (Math.random() > 0.5) {
+          intro.textContent = corrupt(introOriginal, 0.08);
+          setTimeout(() => (intro.textContent = introOriginal), 180);
+        } else {
+          desc.textContent = corrupt(descOriginal, 0.1);
+          setTimeout(() => (desc.textContent = descOriginal), 180);
+        }
+      }
+
+      function holyFlash() {
+        document.body.style.filter = "brightness(1.25) saturate(1.3)";
+        setTimeout(() => {
+          document.body.style.filter = "";
+        }, 120);
+      }
+
+      setInterval(createParticle, 120);
+      setInterval(createAngelCode, 1200);
+      setInterval(textGlitch, 2400);
+      setInterval(() => {
+        if (Math.random() > 0.55) holyFlash();
+      }, 2000);
+    </script>
+  </body>
+</html>
