@@ -210,6 +210,62 @@
       .text-box {
         flex: 1;
       }
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  header {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 20px;
+    z-index: 10;
+  }
+
+  main {
+    height: auto;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 25px;
+    padding: 20px;
+  }
+
+  .img-box {
+    order: 2;
+    width: 100%;
+    flex: none;
+  }
+
+  .img-box img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .text-box {
+    order: 1;
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    flex: none;
+    margin-top: 10px;
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: 52px;
+  }
+
+  .desc {
+    padding: 18px;
+  }
+}
     </style>
   </head>
   <body>
