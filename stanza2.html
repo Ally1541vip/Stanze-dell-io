@@ -6,49 +6,56 @@
     <title>La Biblioteca nella Notte | Stanze dell'Io</title>
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      :root {
+        --void: #050606;
+        --night: #0c0d0b;
+        --stone: #171a17;
+        --stone-soft: #292b25;
+        --gold: #d7a13d;
+        --gold-soft: #ffd986;
+        --text: #f4e4c4;
+        --muted: rgba(244, 228, 196, 0.68);
+        --line: rgba(255, 217, 134, 0.18);
+        --shadow: rgba(0, 0, 0, 0.72);
       }
 
-      :root {
-        --nero-notte: #030405;
-        --grigio-roccia: #202321;
-        --grigio-freddo: #353936;
-        --giallo-scuro: #8f6417;
-        --oro-ombra: #c58a20;
-        --luce-calda: #ffd37a;
-        --testo: #f2dfbd;
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
         min-height: 100vh;
-        overflow: hidden;
+        overflow-x: hidden;
         font-family: Georgia, "Times New Roman", serif;
-        color: var(--testo);
+        color: var(--text);
         background:
           radial-gradient(
-            circle at 74% 52%,
-            rgba(197, 138, 32, 0.28),
-            transparent 18%
+            circle at 50% 18%,
+            rgba(215, 161, 61, 0.16),
+            transparent 32rem
           ),
           radial-gradient(
-            circle at 18% 28%,
-            rgba(90, 96, 90, 0.24),
-            transparent 22%
+            circle at 15% 65%,
+            rgba(91, 96, 82, 0.18),
+            transparent 28rem
           ),
           radial-gradient(
-            circle at 50% 85%,
-            rgba(0, 0, 0, 0.75),
-            transparent 35%
+            circle at 85% 78%,
+            rgba(215, 161, 61, 0.1),
+            transparent 26rem
           ),
           linear-gradient(
-            135deg,
-            #070807 0%,
-            #191b19 38%,
-            #3a3322 64%,
-            #0a0a09 100%
+            145deg,
+            #020303 0%,
+            #111310 42%,
+            #242116 67%,
+            #060706 100%
           );
       }
 
@@ -56,427 +63,469 @@
         content: "";
         position: fixed;
         inset: 0;
-        background:
-          linear-gradient(rgba(255, 210, 120, 0.028) 1px, transparent 1px),
-          linear-gradient(
-            90deg,
-            rgba(255, 210, 120, 0.026) 1px,
-            transparent 1px
-          );
-        background-size: 90px 90px;
-        mask-image: radial-gradient(circle at center, black, transparent 76%);
-        z-index: 1;
         pointer-events: none;
+        z-index: 0;
+        background:
+          linear-gradient(
+            115deg,
+            transparent 0 15%,
+            rgba(255, 220, 145, 0.075) 16%,
+            transparent 28%
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 0 1px,
+            transparent 1px 76px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.014) 0 1px,
+            transparent 1px 76px
+          );
+        mask-image: radial-gradient(
+          circle at center,
+          black 0 62%,
+          transparent 86%
+        );
       }
 
       body::after {
         content: "";
         position: fixed;
         inset: 0;
+        pointer-events: none;
+        z-index: 5;
         background:
           radial-gradient(
             circle at center,
-            transparent 34%,
-            rgba(0, 0, 0, 0.78) 100%
+            transparent 32%,
+            rgba(0, 0, 0, 0.72) 100%
           ),
-          linear-gradient(to bottom, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.52));
-        z-index: 10;
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.42));
+      }
+
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 4;
         pointer-events: none;
+        opacity: 0.12;
+        background-image:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.55) 0 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle at 70% 80%,
+            rgba(255, 255, 255, 0.42) 0 1px,
+            transparent 1px
+          );
+        background-size:
+          37px 37px,
+          59px 59px;
+        animation: grain 8s steps(8) infinite;
       }
 
-      .scene {
+      @keyframes grain {
+        to {
+          transform: translate(-37px, 24px);
+        }
+      }
+
+      .cursor-light {
+        position: fixed;
+        width: 460px;
+        height: 460px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.9;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 217, 134, 0.115),
+          transparent 65%
+        );
+      }
+
+      .room {
         position: relative;
-        z-index: 3;
+        z-index: 2;
+        width: min(1160px, calc(100% - 34px));
         min-height: 100vh;
-        padding: 28px clamp(20px, 4vw, 76px);
-        isolation: isolate;
+        margin: 0 auto;
+        padding: 24px 0 88px;
       }
 
-      header {
-        position: relative;
-        z-index: 14;
+      .topbar {
+        min-height: 54px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
+        gap: 18px;
+        margin-bottom: clamp(34px, 8vw, 84px);
       }
 
       .back {
-        color: var(--testo);
+        color: var(--text);
         text-decoration: none;
-        padding: 11px 18px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 211, 122, 0.22);
-        background: rgba(0, 0, 0, 0.34);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 30px rgba(197, 138, 32, 0.12);
-        transition: 0.28s ease;
+        font-size: 0.88rem;
+        letter-spacing: 0.08em;
+        opacity: 0.76;
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--line);
+        transition:
+          opacity 0.22s ease,
+          transform 0.22s ease;
       }
 
       .back:hover {
-        transform: translateY(-3px);
-        background: rgba(143, 100, 23, 0.18);
-        box-shadow: 0 0 42px rgba(255, 211, 122, 0.25);
+        opacity: 1;
+        transform: translateX(-3px);
       }
 
       .room-number {
+        color: var(--muted);
+        font-size: 0.76rem;
+        letter-spacing: 0.28em;
         text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 0.8rem;
-        color: rgba(242, 223, 189, 0.66);
+        text-align: right;
       }
 
-      main {
-        min-height: calc(100vh - 70px);
-        display: grid;
-        grid-template-columns: 0.78fr 1.22fr;
-        gap: clamp(34px, 5vw, 86px);
-        align-items: center;
-      }
-
-      .text-zone {
+      .hero {
         position: relative;
-        z-index: 9;
-        padding: clamp(26px, 4vw, 48px);
-        border-radius: 38px;
-        background:
-          linear-gradient(
-            145deg,
-            rgba(255, 211, 122, 0.09),
-            rgba(255, 255, 255, 0.035)
-          ),
-          rgba(5, 6, 5, 0.62);
-        border: 1px solid rgba(255, 211, 122, 0.17);
-        backdrop-filter: blur(16px);
-        box-shadow:
-          0 36px 110px rgba(0, 0, 0, 0.72),
-          inset 0 0 44px rgba(255, 255, 255, 0.045);
-        overflow: hidden;
+        min-height: calc(100vh - 160px);
+        display: grid;
+        place-items: center;
+        text-align: center;
       }
 
-      .text-zone::before {
+      .hero::before {
         content: "";
         position: absolute;
-        width: 280px;
-        height: 280px;
-        left: -120px;
-        top: -100px;
+        width: min(640px, 82vw);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 217, 134, 0.115);
+        box-shadow:
+          inset 0 0 80px rgba(255, 217, 134, 0.035),
+          0 0 80px rgba(255, 217, 134, 0.05);
+        animation: spin 44s linear infinite;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: min(820px, 92vw);
+        height: min(330px, 42vw);
         border-radius: 50%;
         background: radial-gradient(
-          circle,
-          rgba(255, 211, 122, 0.18),
+          ellipse,
+          rgba(215, 161, 61, 0.16),
           transparent 70%
         );
-        filter: blur(10px);
+        filter: blur(20px);
+        transform: translateY(84px);
       }
 
-      .tag {
-        position: relative;
-        z-index: 1;
-        display: inline-block;
-        margin-bottom: 18px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: rgba(255, 211, 122, 0.09);
-        border: 1px solid rgba(255, 211, 122, 0.18);
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 0.74rem;
-        color: rgba(255, 226, 173, 0.78);
-      }
-
-      h1 {
-        position: relative;
-        z-index: 1;
-        font-size: clamp(3rem, 7vw, 6.4rem);
-        line-height: 0.9;
-        letter-spacing: -2px;
-        margin-bottom: 24px;
-        color: #f7d794;
-        text-shadow:
-          0 0 22px rgba(255, 211, 122, 0.38),
-          0 16px 42px rgba(0, 0, 0, 0.92);
-      }
-
-      .intro {
-        position: relative;
-        z-index: 1;
-        color: rgba(242, 223, 189, 0.78);
-        font-size: clamp(1rem, 1.45vw, 1.17rem);
-        line-height: 1.75;
-        margin-bottom: 26px;
-      }
-
-      .description {
-        position: relative;
-        z-index: 1;
-        padding: 22px;
-        border-radius: 24px;
-        background: rgba(255, 211, 122, 0.055);
-        border: 1px dashed rgba(255, 211, 122, 0.28);
-        box-shadow: inset 0 0 34px rgba(255, 211, 122, 0.06);
-      }
-
-      .description h2 {
-        margin-bottom: 12px;
-        font-size: 1.28rem;
-        color: rgba(255, 211, 122, 0.92);
-      }
-
-      .description p {
-        line-height: 1.72;
-        color: rgba(242, 223, 189, 0.74);
-      }
-
-      .symbols {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 24px;
-      }
-
-      .symbols span {
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.045);
-        border: 1px solid rgba(255, 211, 122, 0.14);
-        color: rgba(242, 223, 189, 0.68);
-        font-size: 0.86rem;
-      }
-
-      .image-zone {
-        position: relative;
-        z-index: 7;
-        min-height: 780px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .moon-ring {
-        position: absolute;
-        width: min(760px, 92vw);
-        height: min(760px, 92vw);
-        border-radius: 50%;
-        background:
-          radial-gradient(circle, rgba(255, 211, 122, 0.12), transparent 56%),
-          conic-gradient(
-            from 120deg,
-            transparent,
-            rgba(255, 211, 122, 0.28),
-            transparent,
-            rgba(85, 92, 88, 0.28),
-            transparent
-          );
-        filter: blur(2px);
-        animation: rotateRing 30s linear infinite;
-        opacity: 0.8;
-      }
-
-      @keyframes rotateRing {
+      @keyframes spin {
         to {
           transform: rotate(360deg);
         }
       }
 
-      .art-frame {
+      .hero-inner {
         position: relative;
-        width: min(760px, 92vw);
-        padding: 16px;
-        border-radius: 34px;
+        z-index: 2;
+        width: min(960px, 100%);
+        animation: appear 0.9s ease both;
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .kicker {
+        display: inline-block;
+        margin-bottom: 18px;
+        color: var(--gold-soft);
+        font-size: 0.78rem;
+        letter-spacing: 0.36em;
+        text-transform: uppercase;
+        opacity: 0.86;
+      }
+
+      h1 {
+        font-weight: 400;
+        font-size: clamp(3rem, 10vw, 8.8rem);
+        line-height: 0.84;
+        letter-spacing: -0.06em;
+        margin-bottom: 26px;
+        color: #ffe2a0;
+        text-shadow:
+          0 0 34px rgba(255, 217, 134, 0.28),
+          0 24px 76px rgba(0, 0, 0, 0.88);
+      }
+
+      .divider {
+        width: 1px;
+        height: 88px;
+        margin: 0 auto 26px;
+        background: linear-gradient(transparent, var(--gold-soft), transparent);
+        opacity: 0.72;
+      }
+
+      .quote {
+        max-width: 740px;
+        margin: 0 auto;
+        color: rgba(244, 228, 196, 0.8);
+        font-size: clamp(1rem, 2vw, 1.28rem);
+        line-height: 1.9;
+      }
+
+      .scroll-hint {
+        margin-top: 34px;
+        color: rgba(244, 228, 196, 0.46);
+        font-size: 0.74rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+      }
+
+      .library-section {
+        position: relative;
+        margin-top: clamp(38px, 8vw, 92px);
+        display: grid;
+        gap: clamp(44px, 7vw, 88px);
+      }
+
+      .art-wrap {
+        position: relative;
+        width: min(760px, 100%);
+        margin: 0 auto;
+        padding: clamp(10px, 2vw, 18px);
+        border: 1px solid rgba(255, 217, 134, 0.22);
+        border-radius: clamp(20px, 4vw, 42px);
         background:
-          linear-gradient(
-            145deg,
-            rgba(255, 211, 122, 0.24),
-            rgba(255, 255, 255, 0.035)
-          ),
-          rgba(0, 0, 0, 0.42);
-        border: 1px solid rgba(255, 211, 122, 0.24);
+          linear-gradient(145deg, rgba(255, 217, 134, 0.13), transparent 43%),
+          rgba(0, 0, 0, 0.38);
         box-shadow:
-          0 42px 130px rgba(0, 0, 0, 0.86),
-          0 0 105px rgba(197, 138, 32, 0.25),
-          inset 0 0 44px rgba(255, 255, 255, 0.06);
-        overflow: hidden;
-        transform: rotate(1.4deg);
-        transition: 0.35s ease;
+          0 48px 120px var(--shadow),
+          0 0 130px rgba(215, 161, 61, 0.2),
+          inset 0 0 42px rgba(255, 255, 255, 0.045);
+        transform: rotate(1deg);
+        animation: artIn 0.9s ease 0.18s both;
       }
 
-      .art-frame:hover {
-        transform: rotate(0deg) scale(1.018) translateY(-8px);
-        box-shadow:
-          0 52px 150px rgba(0, 0, 0, 0.92),
-          0 0 140px rgba(255, 211, 122, 0.34),
-          inset 0 0 44px rgba(255, 255, 255, 0.08);
+      @keyframes artIn {
+        from {
+          opacity: 0;
+          transform: rotate(1deg) translateY(26px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: rotate(1deg) translateY(0) scale(1);
+        }
       }
 
-      .art-frame::before {
+      .art-wrap::before {
         content: "";
         position: absolute;
-        inset: -100px;
-        background: linear-gradient(
-          120deg,
-          transparent 38%,
-          rgba(255, 226, 173, 0.2) 48%,
-          transparent 60%
-        );
-        transform: translateX(-72%);
-        animation: warmSweep 7s ease-in-out infinite;
-        z-index: 2;
+        inset: -30px;
+        z-index: -1;
+        border-radius: inherit;
+        background:
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 217, 134, 0.16),
+            transparent 65%
+          ),
+          conic-gradient(
+            from 120deg,
+            transparent,
+            rgba(255, 217, 134, 0.13),
+            transparent,
+            rgba(120, 124, 108, 0.12),
+            transparent
+          );
+        filter: blur(16px);
+        animation: aura 24s linear infinite;
+      }
+
+      @keyframes aura {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .art-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(255, 217, 134, 0.16);
+        border-radius: calc(clamp(20px, 4vw, 42px) - 4px);
         pointer-events: none;
       }
 
-      @keyframes warmSweep {
-        0%,
-        48% {
-          opacity: 0;
-          transform: translateX(-74%);
-        }
-        58% {
-          opacity: 0.75;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(74%);
-        }
-      }
-
-      .art-frame img {
+      .art-wrap img {
+        display: block;
         width: 100%;
-        height: 620px;
+        aspect-ratio: 4 / 3;
         object-fit: cover;
         object-position: center;
+        border-radius: clamp(14px, 3vw, 30px);
+        filter: saturate(1.05) contrast(1.08) brightness(0.88);
+      }
+
+      .caption {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 16px 8px 4px;
+        color: rgba(244, 228, 196, 0.7);
+        font-size: 0.84rem;
+        line-height: 1.45;
+      }
+
+      .caption strong {
         display: block;
-        border-radius: 24px;
-        filter: saturate(1.06) contrast(1.08) brightness(0.92);
+        margin-bottom: 2px;
+        color: var(--text);
       }
 
-      .label {
-        position: absolute;
-        left: 24px;
-        bottom: 24px;
-        z-index: 4;
-        padding: 12px 16px;
-        border-radius: 16px;
-        background: rgba(0, 0, 0, 0.58);
-        border: 1px solid rgba(255, 211, 122, 0.22);
-        backdrop-filter: blur(10px);
-        color: rgba(242, 223, 189, 0.9);
-        font-size: 0.88rem;
-        line-height: 1.35;
+      .caption span:last-child {
+        color: var(--gold-soft);
+        text-align: right;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
       }
 
-      .rock {
+      .content {
+        width: min(920px, 100%);
+        margin: 0 auto;
+        display: grid;
+        gap: 38px;
+      }
+
+      .text-block {
+        position: relative;
+        padding-left: clamp(18px, 4vw, 42px);
+        border-left: 1px solid rgba(255, 217, 134, 0.24);
+      }
+
+      .text-block h2 {
+        margin-bottom: 18px;
+        color: #ffe2a0;
+        font-weight: 400;
+        font-size: clamp(1.8rem, 4vw, 3.8rem);
+        line-height: 1;
+      }
+
+      .text-block p {
+        color: rgba(244, 228, 196, 0.8);
+        font-size: clamp(1rem, 1.5vw, 1.13rem);
+        line-height: 2;
+      }
+
+      .symbol-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1px;
+        background: rgba(255, 217, 134, 0.14);
+        border: 1px solid rgba(255, 217, 134, 0.14);
+      }
+
+      .symbol {
+        min-height: 116px;
+        padding: 20px 14px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        background: rgba(4, 5, 4, 0.54);
+        color: rgba(244, 228, 196, 0.76);
+        font-size: 0.82rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .ending {
+        min-height: 38vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        margin-top: clamp(60px, 10vw, 120px);
+      }
+
+      .ending p {
+        max-width: 740px;
+        color: rgba(244, 228, 196, 0.72);
+        font-size: clamp(1.15rem, 2.3vw, 1.65rem);
+        line-height: 1.9;
+        font-style: italic;
+      }
+
+      .stone {
         position: fixed;
-        z-index: 2;
+        z-index: 1;
         pointer-events: none;
+        opacity: 0.55;
         background:
           radial-gradient(
             circle at 30% 20%,
-            rgba(110, 113, 105, 0.55),
-            transparent 28%
+            rgba(130, 134, 120, 0.28),
+            transparent 26%
           ),
-          linear-gradient(145deg, #090a09, #252923, #070707);
-        filter: blur(0.4px);
-        opacity: 0.78;
-        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9);
+          linear-gradient(145deg, #070807, #20241e, #050505);
+        filter: blur(0.35px);
+        box-shadow: inset 0 0 44px rgba(0, 0, 0, 0.95);
       }
 
-      .rock-left {
-        left: -80px;
-        bottom: -40px;
-        width: 310px;
-        height: 78vh;
-        clip-path: polygon(18% 0, 72% 10%, 88% 42%, 70% 100%, 0 100%, 0 14%);
+      .stone-left {
+        left: -150px;
+        bottom: -70px;
+        width: 360px;
+        height: 70vh;
+        clip-path: polygon(20% 0, 74% 10%, 90% 42%, 72% 100%, 0 100%, 0 16%);
       }
 
-      .rock-right {
-        right: -120px;
+      .stone-right {
+        right: -170px;
         bottom: -60px;
-        width: 420px;
-        height: 34vh;
+        width: 470px;
+        height: 31vh;
         clip-path: polygon(0 35%, 28% 16%, 58% 24%, 100% 0, 100% 100%, 0 100%);
-        opacity: 0.46;
-      }
-
-      .glow-orb {
-        position: fixed;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: rgba(255, 211, 122, 0.9);
-        box-shadow:
-          0 0 18px rgba(255, 211, 122, 0.95),
-          0 0 55px rgba(197, 138, 32, 0.55);
-        pointer-events: none;
-        z-index: 4;
-        animation: orbFloat 9s ease-in-out infinite alternate;
-      }
-
-      .orb-1 {
-        left: 18%;
-        top: 18%;
-      }
-      .orb-2 {
-        right: 15%;
-        top: 28%;
-        animation-delay: 2s;
-      }
-      .orb-3 {
-        left: 58%;
-        bottom: 16%;
-        animation-delay: 4s;
-      }
-
-      @keyframes orbFloat {
-        from {
-          transform: translateY(0) scale(0.72);
-          opacity: 0.32;
-        }
-        to {
-          transform: translateY(-42px) scale(1.18);
-          opacity: 0.92;
-        }
+        opacity: 0.34;
       }
 
       .branch {
         position: fixed;
-        width: 300px;
-        height: 2px;
-        background: rgba(17, 20, 18, 0.92);
-        box-shadow: 0 0 16px rgba(255, 211, 122, 0.08);
-        transform-origin: left center;
-        z-index: 2;
+        z-index: 1;
         pointer-events: none;
-      }
-
-      .branch-1 {
-        top: 20%;
-        left: 8%;
-        transform: rotate(-24deg);
-      }
-      .branch-2 {
-        top: 34%;
-        right: 4%;
-        transform: rotate(19deg);
-      }
-      .branch-3 {
-        bottom: 22%;
-        left: 26%;
-        transform: rotate(7deg);
-        opacity: 0.55;
+        width: 280px;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.74);
+        transform-origin: left center;
+        opacity: 0.48;
       }
 
       .branch::before,
       .branch::after {
         content: "";
         position: absolute;
-        width: 82px;
-        height: 2px;
-        background: rgba(17, 20, 18, 0.88);
         right: 44px;
         top: 0;
+        width: 76px;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.74);
         transform-origin: left center;
       }
 
@@ -484,189 +533,275 @@
         transform: rotate(34deg);
       }
       .branch::after {
+        right: 116px;
         transform: rotate(-38deg);
-        right: 118px;
       }
 
-      .particle {
+      .branch-1 {
+        left: 6%;
+        top: 20%;
+        transform: rotate(-24deg);
+      }
+      .branch-2 {
+        right: 4%;
+        top: 35%;
+        transform: rotate(19deg);
+      }
+      .branch-3 {
+        left: 26%;
+        bottom: 22%;
+        transform: rotate(7deg);
+        opacity: 0.34;
+      }
+
+      .firefly {
         position: fixed;
-        width: 5px;
-        height: 5px;
+        z-index: 2;
+        width: 4px;
+        height: 4px;
         border-radius: 50%;
-        background: rgba(255, 211, 122, 0.82);
-        box-shadow: 0 0 18px rgba(255, 211, 122, 0.9);
         pointer-events: none;
-        z-index: 6;
-        animation: firefly linear forwards;
+        background: rgba(255, 217, 134, 0.82);
+        box-shadow: 0 0 16px rgba(255, 217, 134, 0.85);
+        animation: fly linear forwards;
       }
 
-      @keyframes firefly {
+      @keyframes fly {
         from {
           transform: translateY(0) translateX(0) scale(0.5);
           opacity: 0;
         }
-        20% {
-          opacity: 1;
+        18% {
+          opacity: 0.9;
         }
         to {
-          transform: translateY(-110vh) translateX(48px) scale(1.2);
+          transform: translateY(-112vh) translateX(44px) scale(1.15);
           opacity: 0;
         }
       }
 
-      @media (max-width: 1050px) {
-        body {
-          overflow: auto;
+      @media (max-width: 860px) {
+        .room {
+          width: min(100% - 28px, 1160px);
+          padding-bottom: 56px;
         }
 
-        main {
-          grid-template-columns: 1fr;
-          padding-top: 36px;
-          padding-bottom: 70px;
-        }
-
-        .text-zone {
-          order: 2;
-          max-width: 760px;
-          margin: 0 auto;
-        }
-
-        .image-zone {
-          order: 1;
-          min-height: auto;
-        }
-
-        .art-frame img {
-          height: auto;
-          max-height: 78vh;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .scene {
-          padding: 18px;
-        }
-
-        header {
+        .topbar {
           align-items: flex-start;
           flex-direction: column;
+          margin-bottom: 44px;
+        }
+
+        .room-number {
+          text-align: left;
+        }
+
+        .hero {
+          min-height: auto;
+          padding: 50px 0 38px;
         }
 
         h1 {
-          font-size: 3.15rem;
+          font-size: clamp(3.2rem, 16vw, 5.2rem);
+          letter-spacing: -0.07em;
         }
 
-        .rock,
+        .divider {
+          height: 54px;
+        }
+
+        .quote {
+          line-height: 1.75;
+        }
+
+        .art-wrap {
+          transform: none;
+          border-radius: 24px;
+        }
+
+        .art-wrap img {
+          aspect-ratio: 1 / 1;
+        }
+
+        .caption {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .caption span:last-child {
+          text-align: left;
+        }
+
+        .text-block {
+          padding-left: 18px;
+        }
+
+        .text-block p {
+          line-height: 1.85;
+        }
+
+        .symbol-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stone,
         .branch,
-        .glow-orb {
+        .cursor-light {
           display: none;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .room {
+          width: min(100% - 22px, 1160px);
+        }
+
+        .kicker,
+        .scroll-hint,
+        .room-number,
+        .symbol {
+          letter-spacing: 0.16em;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
         }
       }
     </style>
   </head>
+
   <body>
-    <div class="rock rock-left"></div>
-    <div class="rock rock-right"></div>
+    <div class="grain"></div>
+    <div class="cursor-light" id="cursorLight"></div>
+
+    <div class="stone stone-left"></div>
+    <div class="stone stone-right"></div>
 
     <div class="branch branch-1"></div>
     <div class="branch branch-2"></div>
     <div class="branch branch-3"></div>
 
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
-    <div class="glow-orb orb-3"></div>
-
-    <section class="scene">
-      <header>
-        <a class="back" href="index.html">← Torna al portone</a>
+    <main class="room">
+      <header class="topbar">
+        <a class="back" href="index.html">← torna al portone</a>
         <p class="room-number">Stanza II · Grigio giallastro</p>
       </header>
 
-      <main>
-        <section class="text-zone">
-          <span class="tag">soglia dell'immaginazione</span>
-
-          <h1>La Biblioteca<br />nella Notte</h1>
-
-          <p class="intro">
-            Il silenzio è un acceleratore di particelle creative. Mentre fuori tutto è buio e roccia, all’interno del cratere splende un archivio luminoso. Non sono solo libri: sono possibilità. Le farfalle che fuggono dai rami sono i vostri pensieri quando smettono di subire il rumore degli altri e iniziano a seguire la propria luce. Il silenzio non è vuoto, è un pieno di visioni.
+      <section class="hero" aria-labelledby="titolo-stanza">
+        <div class="hero-inner">
+          <span class="kicker">soglia dell'immaginazione</span>
+          <h1 id="titolo-stanza">La Biblioteca<br />nella Notte</h1>
+          <div class="divider"></div>
+          <p class="quote">
+            Nel buio non tutto scompare. Alcune idee, proprio quando il mondo
+            tace, iniziano ad accendersi come piccole stanze segrete.
           </p>
+          <p class="scroll-hint">scorri per entrare</p>
+        </div>
+      </section>
 
-          <div class="description">
+      <section class="library-section" aria-label="Opera e descrizione">
+        <figure class="art-wrap">
+          <img
+            src="imgs/grigio-giallastro.jpg"
+            alt="Vaso con biblioteca luminosa interna, rami e farfalle nella notte"
+          />
+          <figcaption class="caption">
+            <span>
+              <strong>Opera guida</strong>
+              Notte, libri, rami e farfalle
+            </span>
+            <span>luce interna</span>
+          </figcaption>
+        </figure>
+
+        <section class="content">
+          <article class="text-block">
+            <h2>Il buio come rifugio creativo.</h2>
+            <p>
+              Il silenzio è un acceleratore di particelle creative. Mentre fuori
+              tutto è buio e roccia, all'interno del cratere splende un archivio
+              luminoso. Non sono solo libri: sono possibilità. Le farfalle che
+              fuggono dai rami sono pensieri che smettono di subire il rumore
+              degli altri e iniziano a seguire la propria luce.
+            </p>
+          </article>
+
+          <article class="text-block">
             <h2>Descrizione dell'opera</h2>
             <p>
-              Un’opera che gioca con l’espediente del cut-out e della luce zenitale. Il vaso, solitamente contenitore di materia, qui diventa contenitore di mondi. I rami che esplodono verso l’esterno sono i vettori del pensiero che, nutrito dal silenzio della lettura e dello studio, si trasforma in qualcosa di libero e metamorfico.
+              L'opera gioca con l'espediente del cut-out e della luce zenitale.
+              Il vaso, solitamente contenitore di materia, diventa contenitore
+              di mondi. I rami che esplodono verso l'esterno sono vettori del
+              pensiero: nutriti dalla lettura e dallo studio, si trasformano in
+              qualcosa di libero, fragile e metamorfico.
             </p>
-          </div>
+          </article>
 
-          <div class="symbols">
-            <span>notte</span>
-            <span>conoscenza</span>
-            <span>rifugio</span>
-            <span>trasformazione</span>
-            <span>luce interna</span>
-          </div>
+          <section class="symbol-grid" aria-label="Parole chiave della stanza">
+            <div class="symbol">notte</div>
+            <div class="symbol">conoscenza</div>
+            <div class="symbol">rifugio</div>
+            <div class="symbol">trasformazione</div>
+            <div class="symbol">luce interna</div>
+          </section>
         </section>
+      </section>
 
-        <section
-          class="image-zone"
-          aria-label="Opera della stanza grigio giallastra"
-        >
-          <div class="moon-ring"></div>
-
-          <figure class="art-frame">
-            <img
-              src="imgs/grigio-giallastro.jpg"
-              alt="Vaso con biblioteca luminosa interna, rami e farfalle nella notte"
-            />
-            <figcaption class="label">
-              <strong>Opera guida</strong><br />
-              notte, libri, farfalle
-            </figcaption>
-          </figure>
-        </section>
-      </main>
-    </section>
+      <section class="ending">
+        <p>
+          “Il silenzio non è vuoto: è il luogo in cui le visioni imparano a
+          parlare.”
+        </p>
+      </section>
+    </main>
 
     <script>
-      const frame = document.querySelector(".art-frame");
-      const ring = document.querySelector(".moon-ring");
+      const cursorLight = document.getElementById("cursorLight");
+      const artWrap = document.querySelector(".art-wrap");
       const branches = document.querySelectorAll(".branch");
-      const orbs = document.querySelectorAll(".glow-orb");
 
       document.addEventListener("mousemove", (event) => {
         const x = event.clientX / window.innerWidth - 0.5;
         const y = event.clientY / window.innerHeight - 0.5;
 
-        frame.style.transform = `rotate(${x * 3 + 1.4}deg) translate(${x * 10}px, ${y * 10}px)`;
-        ring.style.transform = `translate(${x * 28}px, ${y * 28}px)`;
+        cursorLight.style.left = event.clientX + "px";
+        cursorLight.style.top = event.clientY + "px";
+
+        artWrap.style.transform = `rotate(${x * 2.2 + 1}deg) translate(${x * 8}px, ${y * 8}px)`;
 
         branches.forEach((branch, index) => {
-          const force = (index + 1) * 10;
+          const force = (index + 1) * 8;
           branch.style.translate = `${x * force}px ${y * force}px`;
-        });
-
-        orbs.forEach((orb, index) => {
-          const force = (index + 1) * 18;
-          orb.style.translate = `${x * force}px ${y * force}px`;
         });
       });
 
       function createFirefly() {
-        const p = document.createElement("span");
-        p.classList.add("particle");
-        p.style.left = Math.random() * 100 + "vw";
-        p.style.bottom = "-20px";
-        p.style.animationDuration = 7 + Math.random() * 8 + "s";
-        p.style.opacity = 0.25 + Math.random() * 0.7;
-        p.style.width = 3 + Math.random() * 6 + "px";
-        p.style.height = p.style.width;
-        document.body.appendChild(p);
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+          return;
 
-        setTimeout(() => p.remove(), 15000);
+        const firefly = document.createElement("span");
+        firefly.className = "firefly";
+
+        const size = 2 + Math.random() * 5;
+        firefly.style.width = size + "px";
+        firefly.style.height = size + "px";
+        firefly.style.left = Math.random() * 100 + "vw";
+        firefly.style.bottom = "-12px";
+        firefly.style.animationDuration = 8 + Math.random() * 9 + "s";
+        firefly.style.opacity = 0.22 + Math.random() * 0.5;
+
+        document.body.appendChild(firefly);
+        setTimeout(() => firefly.remove(), 18000);
       }
 
-      setInterval(createFirefly, 360);
+      setInterval(createFirefly, 520);
     </script>
   </body>
 </html>
