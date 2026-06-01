@@ -6,48 +6,55 @@
     <title>La Rosa sotto Vetro | Stanze dell'Io</title>
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      :root {
+        --black: #020303;
+        --black-soft: #07090a;
+        --blue-deep: #07171b;
+        --blue-glass: #103d47;
+        --cyan: #8ce8f2;
+        --cyan-soft: #dff9fb;
+        --text: #e7f6f7;
+        --muted: rgba(231, 246, 247, 0.66);
+        --line: rgba(180, 240, 248, 0.18);
+        --shadow: rgba(0, 0, 0, 0.76);
       }
 
-      :root {
-        --nero: #020304;
-        --nero-soft: #080a0c;
-        --grigio-fumo: #1a2024;
-        --blu-rosa: #0b5261;
-        --azzurro-spento: #78d7e4;
-        --bianco-freddo: #dceff1;
-        --vetro: rgba(190, 240, 255, 0.12);
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
         min-height: 100vh;
-        overflow: hidden;
+        overflow-x: hidden;
         font-family: Georgia, "Times New Roman", serif;
-        color: var(--bianco-freddo);
+        color: var(--text);
         background:
           radial-gradient(
-            circle at 50% 40%,
-            rgba(16, 93, 107, 0.35),
-            transparent 24%
+            circle at 50% 18%,
+            rgba(140, 232, 242, 0.13),
+            transparent 30rem
           ),
           radial-gradient(
-            circle at 78% 20%,
-            rgba(255, 255, 255, 0.08),
-            transparent 18%
+            circle at 20% 74%,
+            rgba(20, 82, 94, 0.18),
+            transparent 28rem
           ),
           radial-gradient(
-            circle at 22% 75%,
-            rgba(120, 215, 228, 0.12),
-            transparent 20%
+            circle at 82% 62%,
+            rgba(255, 255, 255, 0.055),
+            transparent 24rem
           ),
           linear-gradient(
             145deg,
             #000 0%,
-            #050607 42%,
-            #0e1214 70%,
+            #050607 38%,
+            #0c1518 66%,
             #010101 100%
           );
       }
@@ -56,356 +63,455 @@
         content: "";
         position: fixed;
         inset: 0;
-        background:
-          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-          linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.025) 1px,
-            transparent 1px
-          );
-        background-size: 70px 70px;
-        mask-image: radial-gradient(circle at center, black, transparent 78%);
+        z-index: 0;
         pointer-events: none;
-        z-index: 1;
+        background:
+          linear-gradient(
+            118deg,
+            transparent 0 16%,
+            rgba(180, 240, 248, 0.07) 17%,
+            transparent 29%
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 0 1px,
+            transparent 1px 72px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.015) 0 1px,
+            transparent 1px 72px
+          );
+        mask-image: radial-gradient(
+          circle at center,
+          black 0 60%,
+          transparent 86%
+        );
       }
 
       body::after {
         content: "";
         position: fixed;
         inset: 0;
-        background: radial-gradient(
-          circle at center,
-          transparent 38%,
-          rgba(0, 0, 0, 0.72) 100%
-        );
         pointer-events: none;
-        z-index: 8;
+        z-index: 5;
+        background:
+          radial-gradient(
+            circle at center,
+            transparent 31%,
+            rgba(0, 0, 0, 0.74) 100%
+          ),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.52));
       }
 
-      .scene {
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 4;
+        pointer-events: none;
+        opacity: 0.13;
+        background-image:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.54) 0 1px,
+            transparent 1px
+          ),
+          radial-gradient(
+            circle at 70% 80%,
+            rgba(255, 255, 255, 0.38) 0 1px,
+            transparent 1px
+          );
+        background-size:
+          35px 35px,
+          57px 57px;
+        animation: grain 8s steps(8) infinite;
+      }
+
+      @keyframes grain {
+        to {
+          transform: translate(-35px, 22px);
+        }
+      }
+
+      .cursor-light {
+        position: fixed;
+        width: 450px;
+        height: 450px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+          circle,
+          rgba(140, 232, 242, 0.105),
+          transparent 64%
+        );
+      }
+
+      .room {
         position: relative;
+        z-index: 2;
+        width: min(1160px, calc(100% - 34px));
         min-height: 100vh;
-        padding: 28px clamp(20px, 4vw, 76px);
-        z-index: 3;
-        isolation: isolate;
+        margin: 0 auto;
+        padding: 24px 0 88px;
       }
 
-      header {
-        position: relative;
-        z-index: 12;
+      .topbar {
+        min-height: 54px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        gap: 20px;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: clamp(34px, 8vw, 84px);
       }
 
       .back {
-        color: var(--bianco-freddo);
+        color: var(--text);
         text-decoration: none;
-        padding: 11px 18px;
-        border-radius: 999px;
-        border: 1px solid rgba(220, 239, 241, 0.22);
-        background: rgba(255, 255, 255, 0.045);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 28px rgba(120, 215, 228, 0.08);
-        transition: 0.28s ease;
+        font-size: 0.88rem;
+        letter-spacing: 0.08em;
+        opacity: 0.76;
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--line);
+        transition:
+          opacity 0.22s ease,
+          transform 0.22s ease;
       }
 
       .back:hover {
-        background: rgba(120, 215, 228, 0.12);
-        transform: translateY(-3px);
-        box-shadow: 0 0 38px rgba(120, 215, 228, 0.22);
+        opacity: 1;
+        transform: translateX(-3px);
       }
 
       .room-number {
-        font-size: 0.8rem;
-        letter-spacing: 5px;
+        color: var(--muted);
+        font-size: 0.76rem;
+        letter-spacing: 0.28em;
         text-transform: uppercase;
-        color: rgba(220, 239, 241, 0.62);
+        text-align: right;
       }
 
-      main {
+      .hero {
         position: relative;
-        min-height: calc(100vh - 70px);
+        min-height: calc(100vh - 160px);
         display: grid;
-        grid-template-columns: 1.25fr 0.75fr;
-        gap: clamp(30px, 5vw, 80px);
-        align-items: center;
+        place-items: center;
+        text-align: center;
       }
 
-      .image-zone {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 760px;
-        z-index: 5;
-      }
-
-      .glass-aura {
+      .hero::before {
+        content: "";
         position: absolute;
-        width: min(760px, 92vw);
-        height: min(760px, 92vw);
+        width: min(610px, 82vw);
+        aspect-ratio: 1;
         border-radius: 50%;
-        background:
-          radial-gradient(circle, rgba(120, 215, 228, 0.16), transparent 58%),
-          conic-gradient(
-            from 180deg,
-            transparent,
-            rgba(220, 239, 241, 0.28),
-            transparent,
-            rgba(11, 82, 97, 0.45),
-            transparent
-          );
-        filter: blur(3px);
-        animation: rotateAura 26s linear infinite;
-        opacity: 0.75;
+        border: 1px solid rgba(180, 240, 248, 0.12);
+        box-shadow:
+          inset 0 0 90px rgba(140, 232, 242, 0.035),
+          0 0 86px rgba(140, 232, 242, 0.055);
+        animation: spin 42s linear infinite;
       }
 
-      @keyframes rotateAura {
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: min(740px, 92vw);
+        height: min(320px, 42vw);
+        border-radius: 50%;
+        background: radial-gradient(
+          ellipse,
+          rgba(140, 232, 242, 0.12),
+          transparent 70%
+        );
+        filter: blur(22px);
+        transform: translateY(84px);
+      }
+
+      @keyframes spin {
         to {
           transform: rotate(360deg);
         }
       }
 
-      .art-frame {
+      .hero-inner {
         position: relative;
-        width: min(560px, 84vw);
-        padding: 14px;
-        border-radius: 36px;
-        background:
-          linear-gradient(
-            145deg,
-            rgba(220, 239, 241, 0.18),
-            rgba(0, 0, 0, 0.45)
-          ),
-          rgba(255, 255, 255, 0.035);
-        border: 1px solid rgba(220, 239, 241, 0.24);
-        box-shadow:
-          0 36px 120px rgba(0, 0, 0, 0.9),
-          0 0 90px rgba(120, 215, 228, 0.26),
-          inset 0 0 42px rgba(255, 255, 255, 0.08);
-        transform: rotate(-1.4deg);
-        transition: 0.35s ease;
-        overflow: hidden;
-      }
-
-      .art-frame:hover {
-        transform: rotate(0deg) scale(1.025) translateY(-8px);
-        box-shadow:
-          0 46px 140px rgba(0, 0, 0, 0.95),
-          0 0 130px rgba(120, 215, 228, 0.36),
-          inset 0 0 42px rgba(255, 255, 255, 0.1);
-      }
-
-      .art-frame::before {
-        content: "";
-        position: absolute;
-        inset: -80px;
-        background: linear-gradient(
-          115deg,
-          transparent 35%,
-          rgba(255, 255, 255, 0.25) 48%,
-          transparent 62%
-        );
-        transform: translateX(-65%);
-        animation: glassSweep 6s ease-in-out infinite;
         z-index: 2;
-        pointer-events: none;
+        width: min(960px, 100%);
+        animation: appear 0.9s ease both;
       }
 
-      @keyframes glassSweep {
-        0%,
-        45% {
-          transform: translateX(-70%);
+      @keyframes appear {
+        from {
           opacity: 0;
+          transform: translateY(24px);
         }
-        55% {
-          opacity: 0.65;
-        }
-        100% {
-          transform: translateX(70%);
-          opacity: 0;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
       }
 
-      .art-frame img {
-        position: relative;
-        width: 100%;
-        height: 720px;
-        display: block;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 26px;
-        filter: contrast(1.08) saturate(1.08) brightness(0.95);
-        z-index: 1;
-      }
-
-      .label {
-        position: absolute;
-        left: 22px;
-        bottom: 22px;
-        z-index: 4;
-        padding: 12px 16px;
-        border-radius: 16px;
-        color: rgba(220, 239, 241, 0.92);
-        background: rgba(0, 0, 0, 0.58);
-        border: 1px solid rgba(220, 239, 241, 0.22);
-        backdrop-filter: blur(10px);
-        font-size: 0.88rem;
-        line-height: 1.35;
-      }
-
-      .text-zone {
-        position: relative;
-        z-index: 7;
-        padding: clamp(26px, 4vw, 48px);
-        border-radius: 38px;
-        background:
-          linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.08),
-            rgba(11, 82, 97, 0.08)
-          ),
-          rgba(0, 0, 0, 0.46);
-        border: 1px solid rgba(220, 239, 241, 0.18);
-        backdrop-filter: blur(16px);
-        box-shadow:
-          0 30px 100px rgba(0, 0, 0, 0.68),
-          inset 0 0 46px rgba(255, 255, 255, 0.04);
-        overflow: hidden;
-      }
-
-      .text-zone::before {
-        content: "";
-        position: absolute;
-        width: 240px;
-        height: 240px;
-        right: -70px;
-        top: -80px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(120, 215, 228, 0.22),
-          transparent 68%
-        );
-        filter: blur(8px);
-      }
-
-      .tag {
-        position: relative;
+      .kicker {
         display: inline-block;
         margin-bottom: 18px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: rgba(120, 215, 228, 0.1);
-        border: 1px solid rgba(220, 239, 241, 0.18);
-        color: rgba(220, 239, 241, 0.78);
+        color: var(--cyan);
+        font-size: 0.78rem;
+        letter-spacing: 0.36em;
         text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 0.74rem;
-        z-index: 1;
+        opacity: 0.82;
       }
 
       h1 {
-        position: relative;
-        z-index: 1;
-        font-size: clamp(3rem, 7vw, 6.6rem);
-        line-height: 0.9;
-        margin-bottom: 24px;
-        letter-spacing: -2px;
-        text-shadow:
-          0 0 18px rgba(120, 215, 228, 0.34),
-          0 18px 40px rgba(0, 0, 0, 0.9);
-      }
-
-      .intro {
-        position: relative;
-        z-index: 1;
-        color: rgba(220, 239, 241, 0.76);
-        font-size: clamp(1rem, 1.45vw, 1.18rem);
-        line-height: 1.75;
+        font-weight: 400;
+        font-size: clamp(3.1rem, 10vw, 8.9rem);
+        line-height: 0.84;
+        letter-spacing: -0.06em;
         margin-bottom: 26px;
+        color: var(--cyan-soft);
+        text-shadow:
+          0 0 32px rgba(140, 232, 242, 0.28),
+          0 24px 78px rgba(0, 0, 0, 0.92);
       }
 
-      .description {
+      .divider {
+        width: 1px;
+        height: 88px;
+        margin: 0 auto 26px;
+        background: linear-gradient(transparent, var(--cyan), transparent);
+        opacity: 0.68;
+      }
+
+      .quote {
+        max-width: 730px;
+        margin: 0 auto;
+        color: rgba(231, 246, 247, 0.78);
+        font-size: clamp(1rem, 2vw, 1.28rem);
+        line-height: 1.9;
+      }
+
+      .scroll-hint {
+        margin-top: 34px;
+        color: rgba(231, 246, 247, 0.42);
+        font-size: 0.74rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+      }
+
+      .rose-section {
         position: relative;
-        z-index: 1;
-        padding: 22px;
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.045);
-        border: 1px dashed rgba(220, 239, 241, 0.26);
-        box-shadow: inset 0 0 34px rgba(120, 215, 228, 0.06);
+        margin-top: clamp(38px, 8vw, 92px);
+        display: grid;
+        gap: clamp(44px, 7vw, 88px);
       }
 
-      .description h2 {
-        font-size: 1.28rem;
-        margin-bottom: 12px;
-        color: rgba(158, 236, 247, 0.88);
-      }
-
-      .description p {
-        color: rgba(220, 239, 241, 0.72);
-        line-height: 1.7;
-      }
-
-      .keywords {
+      .art-wrap {
         position: relative;
-        z-index: 1;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 24px;
+        width: min(620px, 100%);
+        margin: 0 auto;
+        padding: clamp(10px, 2vw, 18px);
+        border: 1px solid rgba(180, 240, 248, 0.22);
+        border-radius: clamp(20px, 4vw, 42px);
+        background:
+          linear-gradient(145deg, rgba(231, 246, 247, 0.12), transparent 43%),
+          rgba(0, 0, 0, 0.4);
+        box-shadow:
+          0 48px 124px var(--shadow),
+          0 0 125px rgba(140, 232, 242, 0.19),
+          inset 0 0 42px rgba(255, 255, 255, 0.045);
+        transform: rotate(-1deg);
+        animation: artIn 0.9s ease 0.18s both;
       }
 
-      .keywords span {
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.055);
-        border: 1px solid rgba(220, 239, 241, 0.14);
-        color: rgba(220, 239, 241, 0.66);
-        font-size: 0.85rem;
+      @keyframes artIn {
+        from {
+          opacity: 0;
+          transform: rotate(-1deg) translateY(26px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: rotate(-1deg) translateY(0) scale(1);
+        }
       }
 
-      .barbed-wire {
-        position: fixed;
-        left: -10vw;
-        width: 120vw;
-        height: 2px;
-        background: rgba(220, 239, 241, 0.12);
-        box-shadow: 0 0 22px rgba(120, 215, 228, 0.18);
-        transform: rotate(-8deg);
-        z-index: 2;
+      .art-wrap::before {
+        content: "";
+        position: absolute;
+        inset: -34px;
+        z-index: -1;
+        border-radius: inherit;
+        background:
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(140, 232, 242, 0.17),
+            transparent 66%
+          ),
+          conic-gradient(
+            from 180deg,
+            transparent,
+            rgba(231, 246, 247, 0.13),
+            transparent,
+            rgba(16, 61, 71, 0.2),
+            transparent
+          );
+        filter: blur(18px);
+        animation: aura 24s linear infinite;
+      }
+
+      @keyframes aura {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .art-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1px solid rgba(180, 240, 248, 0.15);
+        border-radius: calc(clamp(20px, 4vw, 42px) - 4px);
         pointer-events: none;
       }
 
+      .art-wrap img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        object-position: center;
+        border-radius: clamp(14px, 3vw, 30px);
+        filter: contrast(1.08) saturate(1.05) brightness(0.91);
+      }
+
+      .caption {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 16px 8px 4px;
+        color: rgba(231, 246, 247, 0.68);
+        font-size: 0.84rem;
+        line-height: 1.45;
+      }
+
+      .caption strong {
+        display: block;
+        margin-bottom: 2px;
+        color: var(--text);
+      }
+
+      .caption span:last-child {
+        color: var(--cyan);
+        text-align: right;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .content {
+        width: min(920px, 100%);
+        margin: 0 auto;
+        display: grid;
+        gap: 38px;
+      }
+
+      .text-block {
+        position: relative;
+        padding-left: clamp(18px, 4vw, 42px);
+        border-left: 1px solid rgba(180, 240, 248, 0.22);
+      }
+
+      .text-block h2 {
+        margin-bottom: 18px;
+        color: var(--cyan-soft);
+        font-weight: 400;
+        font-size: clamp(1.8rem, 4vw, 3.8rem);
+        line-height: 1;
+      }
+
+      .text-block p {
+        color: rgba(231, 246, 247, 0.78);
+        font-size: clamp(1rem, 1.5vw, 1.13rem);
+        line-height: 2;
+      }
+
+      .symbol-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1px;
+        background: rgba(180, 240, 248, 0.13);
+        border: 1px solid rgba(180, 240, 248, 0.13);
+      }
+
+      .symbol {
+        min-height: 116px;
+        padding: 20px 14px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        background: rgba(2, 3, 3, 0.56);
+        color: rgba(231, 246, 247, 0.72);
+        font-size: 0.82rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .ending {
+        min-height: 38vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        margin-top: clamp(60px, 10vw, 120px);
+      }
+
+      .ending p {
+        max-width: 740px;
+        color: rgba(231, 246, 247, 0.7);
+        font-size: clamp(1.15rem, 2.3vw, 1.65rem);
+        line-height: 1.9;
+        font-style: italic;
+      }
+
+      .wire {
+        position: fixed;
+        left: -12vw;
+        width: 124vw;
+        height: 1px;
+        z-index: 1;
+        pointer-events: none;
+        background: rgba(180, 240, 248, 0.1);
+        box-shadow: 0 0 20px rgba(140, 232, 242, 0.12);
+        transform: rotate(-8deg);
+        opacity: 0.54;
+      }
+
       .wire-1 {
-        top: 24%;
+        top: 25%;
       }
       .wire-2 {
         top: 70%;
         transform: rotate(7deg);
-        opacity: 0.55;
+        opacity: 0.34;
       }
 
-      .barbed-wire::before,
-      .barbed-wire::after {
+      .wire::before,
+      .wire::after {
         content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧";
         position: absolute;
         left: 0;
         top: -13px;
         width: 100%;
         letter-spacing: 70px;
-        color: rgba(220, 239, 241, 0.14);
+        color: rgba(231, 246, 247, 0.1);
         font-size: 18px;
-        text-shadow: 0 0 12px rgba(120, 215, 228, 0.18);
-        animation: wireMove 22s linear infinite;
+        text-shadow: 0 0 12px rgba(140, 232, 242, 0.15);
+        animation: wireMove 24s linear infinite;
       }
 
-      .barbed-wire::after {
+      .wire::after {
         left: 60px;
         animation-direction: reverse;
-        opacity: 0.6;
+        opacity: 0.55;
       }
 
       @keyframes wireMove {
@@ -416,55 +522,55 @@
 
       .smoke {
         position: fixed;
-        width: 300px;
-        height: 300px;
+        width: 310px;
+        height: 310px;
         border-radius: 50%;
+        z-index: 1;
+        pointer-events: none;
+        filter: blur(30px);
         background: radial-gradient(
           circle,
-          rgba(220, 239, 241, 0.13),
-          transparent 65%
+          rgba(180, 240, 248, 0.11),
+          transparent 66%
         );
-        filter: blur(28px);
-        pointer-events: none;
-        z-index: 2;
-        animation: smokeDrift 14s ease-in-out infinite alternate;
+        animation: smoke 14s ease-in-out infinite alternate;
       }
 
       .smoke-1 {
-        left: 6%;
+        left: 7%;
         top: 18%;
       }
       .smoke-2 {
-        right: 8%;
+        right: 7%;
         bottom: 10%;
         animation-delay: 3s;
       }
       .smoke-3 {
         left: 46%;
-        bottom: -70px;
+        bottom: -80px;
         animation-delay: 6s;
       }
 
-      @keyframes smokeDrift {
+      @keyframes smoke {
         from {
           transform: translate(0, 0) scale(1);
-          opacity: 0.22;
+          opacity: 0.2;
         }
         to {
-          transform: translate(60px, -40px) scale(1.22);
-          opacity: 0.52;
+          transform: translate(58px, -40px) scale(1.22);
+          opacity: 0.46;
         }
       }
 
       .particle {
         position: fixed;
+        z-index: 2;
         width: 4px;
         height: 4px;
         border-radius: 50%;
-        background: rgba(158, 236, 247, 0.78);
-        box-shadow: 0 0 14px rgba(120, 215, 228, 0.85);
         pointer-events: none;
-        z-index: 4;
+        background: rgba(140, 232, 242, 0.74);
+        box-shadow: 0 0 14px rgba(140, 232, 242, 0.82);
         animation: rise linear forwards;
       }
 
@@ -473,152 +579,237 @@
           transform: translateY(0) scale(0.5);
           opacity: 0;
         }
-        20% {
-          opacity: 1;
+        18% {
+          opacity: 0.9;
         }
         to {
-          transform: translateY(-120vh) scale(1.4);
+          transform: translateY(-116vh) scale(1.25);
           opacity: 0;
         }
       }
 
-      @media (max-width: 1050px) {
-        body {
-          overflow: auto;
+      @media (max-width: 860px) {
+        .room {
+          width: min(100% - 28px, 1160px);
+          padding-bottom: 56px;
         }
 
-        main {
-          grid-template-columns: 1fr;
-          padding-top: 36px;
-          padding-bottom: 60px;
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          margin-bottom: 44px;
         }
 
-        .image-zone {
+        .room-number {
+          text-align: left;
+        }
+
+        .hero {
           min-height: auto;
+          padding: 50px 0 38px;
         }
 
-        .art-frame img {
-          height: auto;
-          max-height: 78vh;
+        h1 {
+          font-size: clamp(3.2rem, 16vw, 5.3rem);
+          letter-spacing: -0.07em;
         }
 
-        .text-zone {
-          max-width: 760px;
-          margin: 0 auto;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .scene {
-          padding: 18px;
+        .divider {
+          height: 54px;
         }
 
-        header {
+        .quote {
+          line-height: 1.75;
+        }
+
+        .art-wrap {
+          transform: none;
+          border-radius: 24px;
+        }
+
+        .art-wrap img {
+          aspect-ratio: 1 / 1;
+        }
+
+        .caption {
           flex-direction: column;
           align-items: flex-start;
         }
 
-        h1 {
-          font-size: 3.2rem;
+        .caption span:last-child {
+          text-align: left;
         }
 
-        .barbed-wire,
+        .text-block {
+          padding-left: 18px;
+        }
+
+        .text-block p {
+          line-height: 1.85;
+        }
+
+        .symbol-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cursor-light,
+        .wire,
         .smoke {
           display: none;
         }
       }
+
+      @media (max-width: 420px) {
+        .room {
+          width: min(100% - 22px, 1160px);
+        }
+
+        .kicker,
+        .scroll-hint,
+        .room-number,
+        .symbol {
+          letter-spacing: 0.16em;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
     </style>
   </head>
+
   <body>
-    <div class="barbed-wire wire-1"></div>
-    <div class="barbed-wire wire-2"></div>
+    <div class="grain"></div>
+    <div class="cursor-light" id="cursorLight"></div>
+
+    <div class="wire wire-1"></div>
+    <div class="wire wire-2"></div>
 
     <div class="smoke smoke-1"></div>
     <div class="smoke smoke-2"></div>
     <div class="smoke smoke-3"></div>
 
-    <section class="scene">
-      <header>
-        <a class="back" href="index.html">← Torna al portone</a>
+    <main class="room">
+      <header class="topbar">
+        <a class="back" href="index.html">← torna al portone</a>
         <p class="room-number">Stanza III · Nera</p>
       </header>
 
-      <main>
-        <section class="image-zone" aria-label="Opera della stanza nera">
-          <div class="glass-aura"></div>
-
-          <figure class="art-frame">
-            <img
-              src="imgs/nero.jpg"
-              alt="Rosa scura sotto una campana di vetro avvolta dal filo spinato"
-            />
-            <figcaption class="label">
-              <strong>Opera guida</strong><br />
-              fiore, vetro, limite
-            </figcaption>
-          </figure>
-        </section>
-
-        <section class="text-zone">
-          <span class="tag">soglia dell'ombra</span>
-
-          <h1>La Rosa<br />sotto Vetro</h1>
-
-          <p class="intro">
-            Il silenzio qui è un’armatura trasparente. È quel 'noli me tangere' che ogni artista erige attorno alla propria parte più pura. Questa rosa non è muta perché non ha voce, ma perché ha scelto il vetro e il ferro per non farsi calpestare. È il manifesto di chi sa che proteggere la propria fragilità è l'unica forma di vera forza.
+      <section class="hero" aria-labelledby="titolo-stanza">
+        <div class="hero-inner">
+          <span class="kicker">soglia dell'ombra</span>
+          <h1 id="titolo-stanza">La Rosa<br />sotto Vetro</h1>
+          <div class="divider"></div>
+          <p class="quote">
+            Ci sono fragilità che non chiedono di essere salvate. Chiedono solo
+            uno spazio sacro in cui nessuno possa calpestarle.
           </p>
+          <p class="scroll-hint">scorri per entrare</p>
+        </div>
+      </section>
 
-          <div class="description">
+      <section class="rose-section" aria-label="Opera e descrizione">
+        <figure class="art-wrap">
+          <img
+            src="imgs/nero.jpg"
+            alt="Rosa scura sotto una campana di vetro avvolta dal filo spinato"
+          />
+          <figcaption class="caption">
+            <span>
+              <strong>Opera guida</strong>
+              Fiore, vetro, limite
+            </span>
+            <span>fragilità protetta</span>
+          </figcaption>
+        </figure>
+
+        <section class="content">
+          <article class="text-block">
+            <h2>Una ferita che ha imparato a difendersi.</h2>
+            <p>
+              Il silenzio qui è un'armatura trasparente. È quel
+              <em>noli me tangere</em>
+              che ogni artista erige attorno alla propria parte più pura. Questa
+              rosa non è muta perché non ha voce, ma perché ha scelto il vetro e
+              il ferro per non farsi calpestare.
+            </p>
+          </article>
+
+          <article class="text-block">
             <h2>Descrizione dell'opera</h2>
             <p>
-              Un'installazione che lavora sul contrasto tra hard e soft. La campana di vetro funge da diaframma tra l'osservatore e l'oggetto del desiderio. Il filo spinato non è solo difesa, è un perimetro concettuale: dichiara che la fragilità è preziosa e, per questo, intoccabile. Il fumo e la ceramica verde-petrolio conferiscono all'opera un'aura noir e magnetica.
+              L'installazione lavora sul contrasto tra hard e soft. La campana
+              di vetro diventa diaframma tra l'osservatore e l'oggetto del
+              desiderio. Il filo spinato non è solo difesa: è un perimetro
+              concettuale. Dichiara che la fragilità è preziosa e, proprio per
+              questo, intoccabile.
             </p>
-          </div>
+          </article>
 
-          <div class="keywords">
-            <span>ombra</span>
-            <span>protezione</span>
-            <span>ferita</span>
-            <span>silenzio</span>
-            <span>resistenza</span>
-          </div>
+          <section class="symbol-grid" aria-label="Parole chiave della stanza">
+            <div class="symbol">ombra</div>
+            <div class="symbol">protezione</div>
+            <div class="symbol">ferita</div>
+            <div class="symbol">silenzio</div>
+            <div class="symbol">resistenza</div>
+          </section>
         </section>
-      </main>
-    </section>
+      </section>
+
+      <section class="ending">
+        <p>
+          “Proteggersi non significa chiudersi: significa ricordare al mondo
+          dove non può entrare.”
+        </p>
+      </section>
+    </main>
 
     <script>
-      const frame = document.querySelector(".art-frame");
-      const aura = document.querySelector(".glass-aura");
+      const cursorLight = document.getElementById("cursorLight");
+      const artWrap = document.querySelector(".art-wrap");
       const smoke = document.querySelectorAll(".smoke");
 
       document.addEventListener("mousemove", (event) => {
         const x = event.clientX / window.innerWidth - 0.5;
         const y = event.clientY / window.innerHeight - 0.5;
 
-        frame.style.transform = `rotate(${x * 3 - 1.4}deg) translate(${x * 10}px, ${y * 10}px)`;
-        aura.style.transform = `translate(${x * 26}px, ${y * 26}px)`;
+        cursorLight.style.left = event.clientX + "px";
+        cursorLight.style.top = event.clientY + "px";
 
-        smoke.forEach((s, i) => {
-          const force = (i + 1) * 18;
-          s.style.transform = `translate(${x * force}px, ${y * force}px)`;
+        artWrap.style.transform = `rotate(${x * 2.2 - 1}deg) translate(${x * 8}px, ${y * 8}px)`;
+
+        smoke.forEach((s, index) => {
+          const force = (index + 1) * 10;
+          s.style.translate = `${x * force}px ${y * force}px`;
         });
       });
 
       function createParticle() {
-        const p = document.createElement("span");
-        p.classList.add("particle");
-        p.style.left = Math.random() * 100 + "vw";
-        p.style.bottom = "-20px";
-        p.style.animationDuration = 6 + Math.random() * 7 + "s";
-        p.style.opacity = 0.25 + Math.random() * 0.65;
-        p.style.width = 2 + Math.random() * 5 + "px";
-        p.style.height = p.style.width;
-        document.body.appendChild(p);
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+          return;
 
-        setTimeout(() => p.remove(), 13000);
+        const p = document.createElement("span");
+        p.className = "particle";
+
+        const size = 2 + Math.random() * 5;
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.bottom = "-12px";
+        p.style.animationDuration = 7 + Math.random() * 8 + "s";
+        p.style.opacity = 0.22 + Math.random() * 0.52;
+
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 16000);
       }
 
-      setInterval(createParticle, 340);
+      setInterval(createParticle, 520);
     </script>
   </body>
 </html>
